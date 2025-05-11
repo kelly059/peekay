@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Content" ADD COLUMN     "downloads" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "likes" INTEGER NOT NULL DEFAULT 0;
