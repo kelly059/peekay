@@ -1,11 +1,7 @@
-import { PrismaClient, Content } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
-
-type ContentWithTags = Content & {
-  tags: unknown;
-};
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -39,7 +35,7 @@ export async function GET(req: NextRequest) {
       },
       orderBy: { created_at: 'desc' },
       take: 20,
-    }) as ContentWithTags[];
+    });
 
     const safeResults = results.map((item) => ({
       ...item,
