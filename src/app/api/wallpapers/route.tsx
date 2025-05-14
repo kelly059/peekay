@@ -21,16 +21,26 @@ export async function GET() {
       take: 100,
     });
 
-    // Convert Prisma `Json` fields to JS arrays
-    const parsedWallpapers = wallpapers.map((w) => ({
+    // Define the type of each wallpaper item
+    type Wallpaper = {
+      id: number;
+      title: string;
+      description: string | null;
+      image_url: string | null;
+      category: string | null;
+      tags: unknown; // Use `unknown` initially, or better if you know it's always a string[]
+    };
+
+    const parsedWallpapers = wallpapers.map((w: Wallpaper) => ({
       ...w,
-      description: w.description ?? '', // Default to empty string if null
-      image_url: w.image_url ?? '', // Default to empty string if null
-      category: w.category ?? '', // Default to empty string if null
-      tags: Array.isArray(w.tags) ? w.tags : [], // Ensure tags is an array
+      description: w.description ?? '',
+      image_url: w.image_url ?? '',
+      category: w.category ?? '',
+      tags: Array.isArray(w.tags) ? (w.tags as string[]) : [], // Safely cast unknown to string[]
     }));
 
     return NextResponse.json({ success: true, wallpapers: parsedWallpapers });
+
   } catch (error) {
     const errMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('❌ Error fetching wallpapers:', errMessage);
