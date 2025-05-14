@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/db';
-import type { Comment as PrismaComment } from '@prisma/client';
 
 // Improved type for error details
 type ErrorDetails = Record<string, unknown> | string;
@@ -18,14 +17,21 @@ const errorResponse = (message: string, status: number, details?: ErrorDetails) 
 };
 
 // Type for nested comment replies
-type NestedComment = PrismaComment & {
+type NestedComment = {
+  id: number;
+  content: string;
+  author: string | null;
+  contentId: number;
+  parentId: number | null;
+  deleteToken: string;
+  created_at: Date;
   replies?: NestedComment[];
 };
 
 // Helper to format dates and nested replies
 const formatComment = (comment: NestedComment): NestedComment => ({
   ...comment,
-  created_at: comment.created_at.toISOString() as unknown as Date, // Cast back to Date if needed
+  created_at: comment.created_at.toISOString() as unknown as Date,
   replies: comment.replies ? comment.replies.map(formatComment) : [],
 });
 
