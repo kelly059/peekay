@@ -3,15 +3,14 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
 
-// Define a type for the content item with tags that might not be an array
 type ContentWithTags = Content & {
-  tags: string[] | any;
+  tags: unknown;
 };
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const q = searchParams.get('q');
-  const type = searchParams.get('type'); // e.g., "blog", "wallpaper", etc.
+  const type = searchParams.get('type');
 
   if (!q) {
     return NextResponse.json({ error: 'Missing query' }, { status: 400 });
@@ -23,7 +22,7 @@ export async function GET(req: NextRequest) {
     const results = await prisma.content.findMany({
       where: {
         AND: [
-          type ? { type } : {}, // optional type filtering
+          type ? { type } : {},
           {
             OR: [
               { title: { contains: query, mode: 'insensitive' } },
@@ -31,7 +30,7 @@ export async function GET(req: NextRequest) {
               { category: { contains: query, mode: 'insensitive' } },
               {
                 tags: {
-                  array_contains: [query], // assumes tags is an array
+                  array_contains: [query],
                 },
               },
             ],
@@ -42,10 +41,11 @@ export async function GET(req: NextRequest) {
       take: 20,
     }) as ContentWithTags[];
 
-    // Normalize tags to arrays to prevent frontend errors
-    const safeResults = results.map((item: ContentWithTags) => ({
+    const safeResults = results.map((item) => ({
       ...item,
-      tags: Array.isArray(item.tags) ? item.tags : [],
+      tags: Array.isArray(item.tags) && item.tags.every(tag => typeof tag === 'string')
+        ? item.tags
+        : [],
     }));
 
     return NextResponse.json(safeResults);
