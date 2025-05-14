@@ -50,6 +50,12 @@ export async function GET(request: Request) {
       orderBy: { created_at: 'asc' },
     });
 
+    console.log('Fetched comments:', comments);
+
+    if (!Array.isArray(comments)) {
+      return errorResponse('Unexpected data format received for comments', 500, comments);
+    }
+
     const rootComments = comments.filter((c) => !c.parentId);
 
     return NextResponse.json({
@@ -58,7 +64,7 @@ export async function GET(request: Request) {
     });
   } catch (error) {
     console.error('GET Error:', error);
-    return errorResponse('Failed to fetch comments', 500);
+    return errorResponse('Failed to fetch comments', 500, String(error));
   }
 }
 
@@ -94,7 +100,7 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     console.error('POST Error:', error);
-    return errorResponse('Failed to create comment', 500);
+    return errorResponse('Failed to create comment', 500, String(error));
   }
 }
 
@@ -134,6 +140,6 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('DELETE Error:', error);
-    return errorResponse('Failed to delete comment', 500);
+    return errorResponse('Failed to delete comment', 500, String(error));
   }
 }
