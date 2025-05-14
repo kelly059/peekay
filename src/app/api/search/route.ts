@@ -1,8 +1,12 @@
-// app/api/search/route.ts
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Content } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
+
+// Define a type for the content item with tags that might not be an array
+type ContentWithTags = Content & {
+  tags: string[] | any;
+};
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -36,10 +40,10 @@ export async function GET(req: NextRequest) {
       },
       orderBy: { created_at: 'desc' },
       take: 20,
-    });
+    }) as ContentWithTags[];
 
     // Normalize tags to arrays to prevent frontend errors
-    const safeResults = results.map(item => ({
+    const safeResults = results.map((item: ContentWithTags) => ({
       ...item,
       tags: Array.isArray(item.tags) ? item.tags : [],
     }));
