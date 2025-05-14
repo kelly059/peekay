@@ -1,4 +1,3 @@
-// ./src/app/api/wallpapers/route.tsx
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/db';
 
@@ -23,9 +22,12 @@ export async function GET() {
     });
 
     // Convert Prisma `Json` fields to JS arrays
-    const parsedWallpapers = wallpapers.map(w => ({
+    const parsedWallpapers = wallpapers.map((w) => ({
       ...w,
-      tags: Array.isArray(w.tags) ? w.tags : [],
+      description: w.description ?? '', // Default to empty string if null
+      image_url: w.image_url ?? '', // Default to empty string if null
+      category: w.category ?? '', // Default to empty string if null
+      tags: Array.isArray(w.tags) ? w.tags : [], // Ensure tags is an array
     }));
 
     return NextResponse.json({ success: true, wallpapers: parsedWallpapers });
