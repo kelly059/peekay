@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 export default function UploadPage() {
   const [title, setTitle] = useState('');
@@ -93,7 +94,15 @@ export default function UploadPage() {
       {preview.cover && (
         <div className="mt-4">
           <h2 className="font-semibold">Cover Preview:</h2>
-          <img src={preview.cover} alt="Cover preview" className="mt-2 max-w-full h-48 object-cover" />
+          <div className="mt-2 relative w-full h-48">
+            <Image
+              src={preview.cover}
+              alt="Cover preview"
+              fill
+              style={{ objectFit: 'cover' }}
+              className="rounded"
+            />
+          </div>
         </div>
       )}
 

@@ -1,9 +1,7 @@
-// app/api/content/route.ts
-
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import prisma from '@/lib/db';
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const contents = await prisma.content.findMany({
       orderBy: {

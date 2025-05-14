@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import SearchBar from '@/components/SearchBar';
+import Image from 'next/image';
 
 interface Content {
   id: number;
@@ -37,7 +38,6 @@ export default function CategoryPage() {
         const data = await res.json();
         setContents(data);
         setFilteredContents(data);
-
         if (data.length > 0) {
           setFeaturedContent(data[0]);
         }
@@ -61,13 +61,7 @@ export default function CategoryPage() {
         (content.tags && content.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())))
       );
       setFilteredContents(results);
-      
-      // Update featured content if it exists in filtered results
-      if (results.length > 0) {
-        setFeaturedContent(results[0]);
-      } else {
-        setFeaturedContent(null);
-      }
+      setFeaturedContent(results.length > 0 ? results[0] : null);
     } else {
       setFilteredContents(contents);
       if (contents.length > 0) {
@@ -98,7 +92,6 @@ export default function CategoryPage() {
 
   return (
     <main className="bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 min-h-screen">
-      {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex flex-col gap-4">
           <h1 className="text-4xl font-serif font-bold text-indigo-700 uppercase tracking-tight">
@@ -111,16 +104,19 @@ export default function CategoryPage() {
         </div>
       </header>
 
-      {/* Featured Content - Only shows if matches search */}
       {featuredContent && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="bg-white rounded-lg shadow-2xl overflow-hidden mb-12 transition hover:shadow-3xl">
             {featuredContent.image_url && (
-              <img
-                src={featuredContent.image_url}
-                alt={featuredContent.title}
-                className="w-full h-[450px] object-cover"
-              />
+              <div className="relative w-full h-[450px]">
+                <Image
+                  src={featuredContent.image_url}
+                  alt={featuredContent.title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
             )}
             <div className="p-8">
               <div className="flex flex-wrap gap-2 mb-4">
@@ -147,7 +143,6 @@ export default function CategoryPage() {
         </section>
       )}
 
-      {/* Content Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <h2 className="text-2xl font-serif font-bold mb-8 border-b-2 border-indigo-200 pb-2 text-indigo-700">
           {searchQuery ? `Search Results for "${searchQuery}"` : 'More Stories'}
@@ -168,11 +163,12 @@ export default function CategoryPage() {
             {(searchQuery ? filteredContents : filteredContents.slice(1)).map((content) => (
               <article key={content.id} className="bg-white rounded-lg shadow-md overflow-hidden transition hover:shadow-lg">
                 {content.image_url && (
-                  <div className="relative h-48 w-full overflow-hidden">
-                    <img
+                  <div className="relative h-48 w-full">
+                    <Image
                       src={content.image_url}
                       alt={content.title}
-                      className="absolute h-full w-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                 )}
@@ -208,7 +204,6 @@ export default function CategoryPage() {
         )}
       </section>
 
-      {/* Footer */}
       <footer className="bg-indigo-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="border-t-2 border-indigo-700 pt-8">

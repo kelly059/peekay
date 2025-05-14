@@ -6,7 +6,10 @@ import Head from 'next/head';
 // Helper function to clean up category names for URLs
 function getSlug(text: string) {
   return text
-    .replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '') // remove emoji unicode
+    .replace(
+      /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,
+      ''
+    ) // remove emoji unicode
     .replace(/[^\w\s-]/g, '') // remove non-word characters
     .trim()
     .toLowerCase()
@@ -27,11 +30,11 @@ export default function CategoriesPage() {
           setCategories(json.data);
         } else {
           console.error('Unexpected API response:', json);
-          setCategories([]); // fallback
+          setCategories([]);
         }
       } catch (error) {
         console.error('Failed to fetch categories', error);
-        setCategories([]); // fallback
+        setCategories([]);
       } finally {
         setLoading(false);
       }
@@ -60,7 +63,10 @@ export default function CategoriesPage() {
     <>
       <Head>
         <title>Explore Categories | Modern Collection</title>
-        <meta name="description" content="Browse our beautifully curated categories for every interest" />
+        <meta
+          name="description"
+          content="Browse our beautifully curated categories for every interest"
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </Head>
@@ -158,7 +164,9 @@ export default function CategoriesPage() {
                   />
                 </svg>
                 <h3 className="mt-5 text-2xl font-medium text-gray-900">No categories available</h3>
-                <p className="mt-2 text-gray-500">We're currently curating our collections. Please check back soon.</p>
+                <p className="mt-2 text-gray-500">
+                  We&apos;re currently curating our collections. Please check back soon.
+                </p>
                 <div className="mt-6">
                   <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
                     Notify me

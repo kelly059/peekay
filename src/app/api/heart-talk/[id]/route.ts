@@ -3,10 +3,17 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(request: Request, context: unknown) {
   try {
+    const params = (context as { params: { id?: string } }).params;
+    const id = params?.id;
+
+    if (!id) {
+      return NextResponse.json({ error: 'ID is required' }, { status: 400 });
+    }
+
     const content = await prisma.content.findUnique({
-      where: { id: Number(params.id) },
+      where: { id: Number(id) },
     });
 
     if (!content) {
@@ -19,3 +26,4 @@ export async function GET(request: Request, { params }: { params: { id: string }
     return NextResponse.json({ error: 'Failed to fetch content' }, { status: 500 });
   }
 }
+

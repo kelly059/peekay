@@ -14,6 +14,13 @@ import {
   FiAlignLeft, FiAlignCenter, FiAlignRight
 } from 'react-icons/fi';
 
+interface CustomImageAttributes {
+  src: string;
+  alt?: string;
+  title?: string;
+  'data-id'?: string | null;
+}
+
 const CustomImage = Image.extend({
   addAttributes() {
     return {
@@ -82,10 +89,12 @@ export default function UploadPage() {
           </svg>
         `);
 
-      editor.chain().focus().setImage({
+      const imageAttributes: CustomImageAttributes = {
         src: placeholderImage,
-        'data-id': placeholderId,
-      } as any).run();
+        'data-id': placeholderId
+      };
+
+      editor.chain().focus().setImage(imageAttributes).run();
 
       const reader = new FileReader();
       reader.onload = () => {
@@ -156,7 +165,7 @@ export default function UploadPage() {
         setMessage(`❌ Error: ${result.error || 'Upload failed'}`);
       }
     } catch (error) {
-      setMessage('❌ Network error. Try again.');
+      setMessage(`❌ Error: ${error instanceof Error ? error.message : 'Network error'}`);
     } finally {
       setIsUploading(false);
     }

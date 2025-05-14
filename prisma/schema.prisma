@@ -27,11 +27,16 @@ model Content {
 }
 
 model Comment {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   content     String
   author      String?
-  created_at  DateTime @default(now())
+  created_at  DateTime  @default(now())
   contentId   Int
   deleteToken String
-  contentRef  Content  @relation(fields: [contentId], references: [id])
+  contentRef  Content   @relation(fields: [contentId], references: [id])
+
+  // Self-referencing fields for replies
+  parentId    Int? 
+  parent      Comment?   @relation("CommentReplies", fields: [parentId], references: [id])
+  replies     Comment[]  @relation("CommentReplies")
 }

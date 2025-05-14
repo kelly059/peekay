@@ -1,3 +1,4 @@
+// ./src/app/api/wallpaperupload/route.ts
 import { NextResponse } from 'next/server';
 import cloudinary from '@/lib/cloudinary';
 import prisma from '@/lib/db';
@@ -17,39 +18,40 @@ export async function POST(req: Request) {
     const description = formData.get('description')?.toString() || '';
     const tagsRaw = formData.get('tags')?.toString() || '';
     const category = formData.get('category')?.toString() || '';
-    const type = formData.get('type')?.toString() || 'wallpaper'; // Default to wallpaper
+    const type = formData.get('type')?.toString() || 'wallpaper';
 
-    // Debug log to verify type is being passed
     console.log('DEBUG TYPE:', type);
 
     const tags = tagsRaw.split(',').map(tag => tag.trim()).filter(tag => tag);
 
-    // Get image file
     const file = formData.get('image') as File;
     if (!file || typeof file === 'string') {
       return NextResponse.json({ success: false, message: 'No file uploaded.' }, { status: 400 });
     }
 
-    // Convert file to buffer
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
-    // Upload to Cloudinary
-    const uploadResult = await new Promise<any>((resolve, reject) => {
+    // Define Cloudinary upload result type
+    interface CloudinaryUploadResult {
+      secure_url: string;
+      [key: string]: unknown;
+    }
+
+    const uploadResult: CloudinaryUploadResult = await new Promise((resolve, reject) => {
       cloudinary.uploader.upload_stream(
         {
-          folder: type, // Save by type (e.g., blog, wallpaper)
+          folder: type,
           public_id: uuidv4(),
           resource_type: 'image',
         },
         (error, result) => {
           if (error) reject(error);
-          else resolve(result);
+          else resolve(result as CloudinaryUploadResult);
         }
       ).end(buffer);
     });
 
-    // Save to database
     const newContent = await prisma.content.create({
       data: {
         title,
@@ -65,12 +67,13 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true, content: newContent }, { status: 200 });
 
-  } catch (error: any) {
-    console.error('❌ Upload error:', error);
+  } catch (error) {
+    const errMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('❌ Upload error:', errMessage);
     return NextResponse.json(
       {
         success: false,
-        message: error.message || 'Unknown error occurred',
+        message: errMessage,
         details: process.env.NODE_ENV === 'development' ? error : undefined,
       },
       { status: 500 }

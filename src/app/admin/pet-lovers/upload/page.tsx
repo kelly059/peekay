@@ -42,8 +42,8 @@ export default function UploadPage() {
       } else {
         alert(`Error: ${result.message}`);
       }
-    } catch (error) {
-      alert('Upload failed');
+    } catch (error: unknown) {
+      alert(`Upload failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
       setLoading(false);
     }

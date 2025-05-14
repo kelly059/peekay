@@ -60,7 +60,7 @@ export default function LandingPage() {
       description: 'Mature conversations in a respectful environment',
       highlight: 'text-pink-400',
       gradient: 'from-pink-400 to-rose-400',
-      link: '/adult-talk'
+      link: '/whisper'
     },
     {
       icon: '🎧',
@@ -72,11 +72,11 @@ export default function LandingPage() {
     },
     {
       icon: '❤️',
-      title: 'Heart Talks',
+      title: 'Heart Talk',
       description: 'Melodies that soothe the heart and mind',
       highlight: 'text-rose-400',
       gradient: 'from-rose-400 to-pink-400',
-      link: '/love-songs'
+      link: '/heart-talks'
     },
     {
       icon: '🐾',
@@ -105,11 +105,12 @@ export default function LandingPage() {
     
     try {
       await navigator.share({
-        title: 'Content Sanctuary - Modern Digital Experience',
-        text: 'Check out this amazing content platform with blogs, wallpapers, confessions and more!',
+        title: 'lirivelle - Your Content Sanctuary',
+        text: 'Discover wallpapers, confessions, relaxing sounds, heart talk and more at lirivelle!',
         url: url
       });
-    } catch (err) {
+    } catch (error) {
+      console.error('Sharing failed:', error);
       copyToClipboard(url);
     }
   };
@@ -154,43 +155,52 @@ export default function LandingPage() {
     <div className={`min-h-screen transition-colors duration-500 ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
       <Head>
         {/* Primary Meta Tags */}
-        <title>lirivelle | Blogs, Wallpapers, Confessions & More</title>
+        <title>lirivelle | 🖼 Wallpapers 🕵 Confessions 💋 Whispers 📝 Blogs</title>
         <meta 
           name="description" 
-          content="Explore diverse content—blogs, wallpapers, confessions, adult talk, relaxing sounds, love songs, and pet lovers community. Join Content Sanctuary today!" 
+          content="🎧 Relaxing Sounds ❤ Heart Talk 🐾 Pet Lovers - Your sanctuary for confessions, HD wallpapers, mental wellness, and emotional support. Join lirivelle today!" 
         />
-        <meta name="keywords" content="blogs, wallpapers, confessions, adult content, relaxing sounds, love songs, pet lovers, online community" />
+        <meta name="keywords" content="🖼 Wallpapers, 🕵 Confessions, 💋 Whispers, 📝 Blogs, 🎧 Relaxing Sounds, ❤ Heart Talk, 🐾 Pet Lovers, anonymous confessions, HD wallpapers, poetic whispers, self-care, mental wellness, emotional support, stress relief" />
+        <meta name="author" content="lirivelle" />
+        <meta name="robots" content="index, follow" />
         
         {/* Open Graph / Facebook */}
-        <meta property="og:title" content="Content Sanctuary | Modern Digital Experience" />
-        <meta property="og:description" content="A curated space for blogs, wallpapers, confessions, and more. Join now!" />
+        <meta property="og:title" content="lirivelle | 🖼 Wallpapers 🕵 Confessions 💋 Whispers" />
+        <meta property="og:description" content="📝 Blogs 🎧 Relaxing Sounds ❤ Heart Talk 🐾 Pet Lovers - Your digital sanctuary for authentic sharing and mental wellness" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourdomain.com" />
-        <meta property="og:image" content="https://yourdomain.com/og-image.jpg" />
+        <meta property="og:url" content="https://lirivelle.com" />
+        <meta property="og:image" content="https://lirivelle.com/images/website_imagepreview.jpg" />
+        <meta property="og:site_name" content="lirivelle" />
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Content Sanctuary" />
-        <meta name="twitter:description" content="Explore diverse content—blogs, wallpapers, confessions, and more." />
-        <meta name="twitter:image" content="https://yourdomain.com/twitter-card.jpg" />
+        <meta name="twitter:title" content="lirivelle | Content Sanctuary" />
+        <meta name="twitter:description" content="🖼 Wallpapers 🕵 Confessions 💋 Whispers 📝 Blogs 🎧 Sounds ❤ Heart Talk - Join our community" />
+        <meta name="twitter:image" content="https://lirivelle.com/public/images/website_imagepreview.jpg" />
+        <meta name="twitter:creator" content="@lirivelle" />
         
         {/* Canonical URL */}
-        <link rel="canonical" href="https://yourdomain.com" />
+        <link rel="canonical" href="https://lirivelle.com" />
         
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        
+        {/* Theme Color */}
+        <meta name="theme-color" content="#FFFFFF" />
+        <meta name="msapplication-TileColor" content="#FFFFFF" />
         
         {/* Schema.org markup */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "Content Sanctuary",
-            "url": "https://yourdomain.com",
-            "description": "A premium platform for blogs, wallpapers, confessions, and more.",
+            "name": "lirivelle",
+            "url": "https://lirivelle.com",
+            "description": "A digital sanctuary offering 🖼 Wallpapers, 🕵 Confessions, 💋 Whispers, 📝 Blogs, 🎧 Relaxing Sounds, ❤ Heart Talk, and 🐾 Pet Lovers community",
             "potentialAction": {
               "@type": "SearchAction",
-              "target": "https://yourdomain.com/search?q={search_term_string}",
+              "target": "https://lirivelle.com/search?q={search_term_string}",
               "query-input": "required name=search_term_string"
             }
           })}
@@ -212,7 +222,7 @@ export default function LandingPage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 className="text-xl font-light hover:scale-105 transition-transform"
-                aria-label="Content Sanctuary Home"
+                aria-label="lirivelle Home"
               >
                 <span className="font-medium italic">lirivelle</span> love
               </motion.a>
@@ -264,7 +274,7 @@ export default function LandingPage() {
               <a 
                 href="#home" 
                 className="text-xl font-light hover:scale-105 transition-transform"
-                aria-label="Content Sanctuary Home"
+                aria-label="lirivelle Home"
               >
                 <span className="font-medium italic">lirivelle</span> pl
               </a>
@@ -326,7 +336,7 @@ export default function LandingPage() {
               className="text-5xl md:text-7xl lg:text-8xl font-light mb-8 text-gray-900 dark:text-white"
             >
               <span className="font-medium italic bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
-              lirivelle
+                lirivelle
               </span> sweet
             </motion.h1>
             
@@ -336,7 +346,7 @@ export default function LandingPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-16"
             >
-              An exquisitely designed digital sanctuary for your diverse content needs
+              Your digital sanctuary for 🖼 Wallpapers, 🕵 Confessions, 💋 Whispers, and ❤ Heart Talk
             </motion.p>
             
             <motion.div
@@ -384,7 +394,7 @@ export default function LandingPage() {
               <button 
                 onClick={() => handleAuthClick('signup')}
                 className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300"
-                aria-label="Get started with Content Sanctuary"
+                aria-label="Get started with lirivelle"
               >
                 Get Started
               </button>
@@ -398,7 +408,7 @@ export default function LandingPage() {
               <button 
                 onClick={handleShareClick}
                 className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 relative"
-                aria-label="Share Content Sanctuary"
+                aria-label="Share lirivelle"
               >
                 Share
                 {showShareTooltip && (
@@ -488,7 +498,7 @@ export default function LandingPage() {
                 Love what we do? <span className="font-medium">Support us!</span>
               </h2>
               <p className="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-                Your donations help keep Content Sanctuary free and accessible for everyone.
+                Your donations help keep lirivelle free and accessible for everyone.
               </p>
               <div className="flex justify-center">
                 <motion.div
@@ -526,7 +536,7 @@ export default function LandingPage() {
                 Questions? <span className="font-medium">Contact us</span>
               </h2>
               <p className="text-xl text-gray-600 dark:text-gray-400 mb-12">
-                We're here to help with any questions you might have.
+                We&apos;re here to help with any questions you might have.
               </p>
               
               <motion.div
@@ -553,7 +563,7 @@ export default function LandingPage() {
             <a 
               href="#home" 
               className="text-xl font-light mb-6 md:mb-0 hover:scale-105 transition-transform"
-              aria-label="Content Sanctuary Home"
+              aria-label="lirivelle Home"
             >
               <span className="font-medium italic">lirivelle</span> love
             </a>

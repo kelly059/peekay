@@ -47,9 +47,9 @@ export default function ContactForm() {
           <div className="hidden md:block w-1/3 bg-gradient-to-b from-indigo-500 to-purple-600 p-8">
             <div className="flex flex-col h-full justify-between">
               <div>
-                <h2 className="text-2xl font-bold text-white">Let's Connect</h2>
+                <h2 className="text-2xl font-bold text-white">Let&#39;s Connect</h2>
                 <p className="text-indigo-100 mt-2">
-                  Have a project in mind or want to collaborate? Send me a message and I'll get back to you soon.
+                  Have a project in mind or want to collaborate? Send me a message and I&#39;ll get back to you soon.
                 </p>
               </div>
               <div className="space-y-4">
@@ -76,7 +76,7 @@ export default function ContactForm() {
           {/* Form Section */}
           <div className="w-full md:w-2/3 p-8 md:p-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-2">Send us a message</h2>
-            <p className="text-gray-500 mb-8">We'd love to hear from you</p>
+            <p className="text-gray-500 mb-8">We&#39;d love to hear from you</p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <motion.div 

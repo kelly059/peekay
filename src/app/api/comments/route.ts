@@ -32,10 +32,11 @@ export async function GET(req: Request) {
     });
 
     return NextResponse.json(comments, { status: 200 });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("GET comments error:", error);
+    const errorMessage = error instanceof Error ? error.message : "Internal server error";
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: errorMessage },
       { status: 500 }
     );
   }
@@ -81,10 +82,11 @@ export async function POST(req: Request) {
 
     // Return just what the frontend needs
     return NextResponse.json({ id: newComment.id }, { status: 201 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("POST comment error:", error);
+    const errorMessage = error instanceof Error ? error.message : "Failed to create comment";
     return NextResponse.json(
-      { error: "Failed to create comment", details: error.message },
+      { error: errorMessage },
       { status: 500 }
     );
   }
@@ -130,10 +132,11 @@ export async function DELETE(req: Request) {
       { success: true, message: "Comment deleted successfully" },
       { status: 200 }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("DELETE comment error:", error);
+    const errorMessage = error instanceof Error ? error.message : "Failed to delete comment";
     return NextResponse.json(
-      { error: "Failed to delete comment", details: error.message },
+      { error: errorMessage },
       { status: 500 }
     );
   }

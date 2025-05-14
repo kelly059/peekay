@@ -1,3 +1,4 @@
+// ./src/app/api/wallpapers/route.tsx
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/db';
 
@@ -28,13 +29,15 @@ export async function GET() {
     }));
 
     return NextResponse.json({ success: true, wallpapers: parsedWallpapers });
-  } catch (error: any) {
-    console.error('❌ Error fetching wallpapers:', error);
+  } catch (error) {
+    const errMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('❌ Error fetching wallpapers:', errMessage);
+
     return NextResponse.json(
       {
         success: false,
         message: 'Failed to fetch wallpapers.',
-        error: process.env.NODE_ENV === 'development' ? error.message : undefined,
+        error: process.env.NODE_ENV === 'development' ? errMessage : undefined,
       },
       { status: 500 }
     );

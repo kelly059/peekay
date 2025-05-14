@@ -1,15 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter, useParams } from 'next/navigation'; // ✅ useParams instead of useSearchParams
+import { useRouter, useParams } from 'next/navigation';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
+import Image from 'next/image';
 
 export default function EditPage() {
   const router = useRouter();
   const params = useParams();
-  const postId = params.id; // ✅ This correctly reads /admin/edit/[id]
+  const postId = params.id;
 
   const [message, setMessage] = useState('');
   const [isSaving, setIsSaving] = useState(false);
@@ -90,8 +91,8 @@ export default function EditPage() {
       } else {
         setMessage(`❌ Error: ${result.error}`);
       }
-    } catch (error) {
-      setMessage('❌ Network error.');
+    } catch (error: unknown) {
+      setMessage(`❌ Error: ${error instanceof Error ? error.message : 'An unknown error occurred'}`);
     } finally {
       setIsSaving(false);
     }
@@ -144,7 +145,15 @@ export default function EditPage() {
             {formData.coverUrl && (
               <div>
                 <label className="block mb-1">Current Cover</label>
-                <img src={formData.coverUrl} alt="Cover" className="w-full max-h-64 object-cover rounded-lg" />
+                <div className="w-full h-64 relative rounded-lg overflow-hidden">
+                  <Image
+                    src={formData.coverUrl}
+                    alt="Cover"
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    className="rounded-lg"
+                  />
+                </div>
               </div>
             )}
 

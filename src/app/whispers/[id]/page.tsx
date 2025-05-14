@@ -4,9 +4,16 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 
+// Define the confession type
+interface Confession {
+  title: string;
+  description: string;
+  created_at: string;
+}
+
 export default function ReadConfessionPage() {
   const { id } = useParams();
-  const [confession, setConfession] = useState<any>(null);
+  const [confession, setConfession] = useState<Confession | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,7 +26,7 @@ export default function ReadConfessionPage() {
         
         if (!res.ok) throw new Error('Failed to fetch confession');
         
-        const data = await res.json();
+        const data: Confession = await res.json();
         setConfession(data);
       } catch (err) {
         console.error('Error loading confession:', err);

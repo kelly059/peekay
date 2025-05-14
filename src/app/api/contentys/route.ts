@@ -15,10 +15,19 @@ export async function GET() {
     });
 
     return NextResponse.json({ data: contents }, { status: 200 });
-  } catch (err: any) {
-    console.error('Fetch error:', err);
+  } catch (err: unknown) {  // Use 'unknown' instead of 'any'
+    if (err instanceof Error) {
+      console.error('Fetch error:', err.message);  // Safely access the message property
+      return NextResponse.json(
+        { message: 'Failed to fetch contents', error: err.message },
+        { status: 500 }
+      );
+    }
+    
+    // Fallback for any unknown error type
+    console.error('Unexpected error:', err);
     return NextResponse.json(
-      { message: 'Failed to fetch contents', error: String(err) },
+      { message: 'Failed to fetch contents', error: 'Unknown error' },
       { status: 500 }
     );
   }

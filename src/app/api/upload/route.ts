@@ -1,3 +1,4 @@
+// app/api/upload/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/db';
 import cloudinary from '@/lib/cloudinary';
@@ -10,10 +11,12 @@ export const config = {
   },
 };
 
+// Utility: Get a string value from FormData
 const getSingleValue = (value: FormDataEntryValue | null): string =>
   (value instanceof File ? value.name : value) || '';
 
-const parseJsonField = (value: FormDataEntryValue | null): any => {
+// Utility: Safely parse JSON from FormData
+const parseJsonField = (value: FormDataEntryValue | null): unknown => {
   try {
     return JSON.parse(getSingleValue(value));
   } catch {
@@ -31,16 +34,21 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'No file uploaded' }, { status: 400 });
     }
 
-    // Validate required fields
+    // Required fields
     const title = getSingleValue(formData.get('title'));
     const content = getSingleValue(formData.get('content'));
+
     if (!title || !content) {
-      return NextResponse.json({ success: false, error: 'Title and content are required' }, { status: 400 });
+      return NextResponse.json(
+        { success: false, error: 'Title and content are required' },
+        { status: 400 }
+      );
     }
 
-    // Handle temporary file storage
+    // Save to temporary location
     const tempDir = join(process.cwd(), 'temp');
     await mkdir(tempDir, { recursive: true });
+
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
     const tempPath = join(tempDir, file.name);
@@ -51,29 +59,32 @@ export async function POST(req: NextRequest) {
       resource_type: 'auto',
     });
 
-    // Create content record in the database
+    // Create database record
     const newContent = await prisma.content.create({
       data: {
         title,
         description: content,
         image_url: uploadResult.resource_type === 'image' ? uploadResult.secure_url : null,
         video_url: uploadResult.resource_type === 'video' ? uploadResult.secure_url : null,
-        extra_links: parseJsonField(formData.get('extra_links')),
-        tags: parseJsonField(formData.get('tags')),
-        category: getSingleValue(formData.get('category')), // Use dynamic category
+        extra_links: parseJsonField(formData.get('extra_links')) as object | undefined,
+        tags: parseJsonField(formData.get('tags')) as string[] | undefined,
+        category: getSingleValue(formData.get('category')),
       },
     });
 
-    // Clean up the temporary file
+    // Cleanup
     await unlink(tempPath);
 
     return NextResponse.json({ success: true, content: newContent });
   } catch (err) {
     console.error('Upload error:', err);
-    return NextResponse.json({
-      success: false,
-      error: 'Upload failed',
-      details: err instanceof Error ? err.message : String(err),
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: 'Upload failed',
+        details: err instanceof Error ? err.message : String(err),
+      },
+      { status: 500 }
+    );
   }
 }

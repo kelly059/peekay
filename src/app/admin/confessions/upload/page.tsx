@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import Image from 'next/image';
 
 export default function ConfessionUploadPage() {
   const [title, setTitle] = useState('');
@@ -64,8 +65,8 @@ export default function ConfessionUploadPage() {
       setPreviewImage(null);
       setDescription('');
       setSuccess(true);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'An unknown error occurred');
     } finally {
       setLoading(false);
     }
@@ -97,11 +98,14 @@ export default function ConfessionUploadPage() {
           </label>
           {previewImage ? (
             <div className="mt-2 relative">
-              <img 
-                src={previewImage} 
-                alt="Preview" 
-                className="h-48 w-full object-cover rounded-md border border-gray-300"
-              />
+              <div className="h-48 w-full relative rounded-md border border-gray-300 overflow-hidden">
+                <Image
+                  src={previewImage}
+                  alt="Preview"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
               <button
                 type="button"
                 onClick={handleRemoveImage}

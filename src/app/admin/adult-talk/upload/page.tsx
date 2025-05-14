@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import Image from 'next/image';
 
 export default function WhisperUploadPage() {
   const [title, setTitle] = useState('');
@@ -62,8 +63,9 @@ export default function WhisperUploadPage() {
       setPreviewImage(null);
       setDescription('');
       setSuccess(true);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      const error = err as Error;
+      setError(error.message);
     } finally {
       setLoading(false);
     }
@@ -95,10 +97,13 @@ export default function WhisperUploadPage() {
           </label>
           {previewImage ? (
             <div className="mt-2 relative">
-              <img
-                src={previewImage}
+              <Image
+                src={previewImage || ''}
                 alt="Preview"
+                width={600}
+                height={300}
                 className="h-48 w-full object-cover rounded-md border border-gray-300"
+                unoptimized
               />
               <button
                 type="button"

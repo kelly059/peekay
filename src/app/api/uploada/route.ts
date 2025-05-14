@@ -48,9 +48,10 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ message: 'Upload successful', data: newContent });
-  } catch (error: any) {
-    console.error('Upload error:', error);
-    return NextResponse.json({ message: 'Upload failed', error: error.message }, { status: 500 });
+  } catch (error) {
+    const err = error instanceof Error ? error.message : String(error);
+    console.error('Upload error:', err);
+    return NextResponse.json({ message: 'Upload failed', error: err }, { status: 500 });
   }
 }
 
@@ -69,5 +70,5 @@ const uploadToCloudinary = async (file: File): Promise<string> => {
   });
 };
 
-const isImage = (file: File) => file.type.startsWith('image/');
-const isVideo = (file: File) => file.type.startsWith('video/');
+const isImage = (file: File): boolean => file.type.startsWith('image/');
+const isVideo = (file: File): boolean => file.type.startsWith('video/');

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function UploadPage() {
   const [imagePreview, setImagePreview] = useState('');
@@ -9,7 +10,7 @@ export default function UploadPage() {
     description: '',
     category: '',
     tags: '',
-    type: 'wallpaper', // ✅ default type set to wallpaper
+    type: 'wallpaper',
   });
   const [loading, setLoading] = useState(false);
 
@@ -33,7 +34,7 @@ export default function UploadPage() {
     formData.append('description', form.description);
     formData.append('category', form.category);
     formData.append('tags', form.tags);
-    formData.append('type', form.type); // ✅ include type in FormData
+    formData.append('type', form.type);
 
     const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
     if (fileInput.files?.[0]) {
@@ -95,12 +96,19 @@ export default function UploadPage() {
           className="border p-2 rounded"
         />
 
-        {/* Hidden input or select for type (optional to expose) */}
         <input type="hidden" name="type" value={form.type} />
 
         <input type="file" accept="image/*" required onChange={handleImageChange} />
         {imagePreview && (
-          <img src={imagePreview} alt="Preview" className="max-w-full mt-2 rounded border" />
+          <div className="relative w-full h-64 mt-2 rounded border overflow-hidden">
+            <Image
+              src={imagePreview}
+              alt="Preview"
+              fill
+              style={{ objectFit: 'cover' }}
+              className="rounded"
+            />
+          </div>
         )}
         <button type="submit" className="bg-blue-600 text-white py-2 px-4 rounded" disabled={loading}>
           {loading ? 'Uploading...' : 'Upload'}

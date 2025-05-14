@@ -1,7 +1,7 @@
 'use client';
 
 import { notFound, useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import React from 'react';
 
 interface Content {
@@ -27,7 +27,7 @@ export default function BlogPage() {
   const [commentText, setCommentText] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const fetchContent = async () => {
+  const fetchContent = useCallback(async () => {
     const res = await fetch(`/api/contents?id=${id}`);
     if (res.ok) {
       const data = await res.json();
@@ -35,13 +35,13 @@ export default function BlogPage() {
     } else {
       notFound();
     }
-  };
+  }, [id]);
 
-  const fetchComments = async () => {
+  const fetchComments = useCallback(async () => {
     const res = await fetch(`/api/comments?contentId=${id}`);
     const data = await res.json();
     setComments(data);
-  };
+  }, [id]);
 
   const handlePostComment = async () => {
     if (!commentText.trim()) return;
@@ -90,7 +90,7 @@ export default function BlogPage() {
   useEffect(() => {
     fetchContent();
     fetchComments();
-  }, [id]);
+  }, [id, fetchContent, fetchComments]);
 
   if (!content) {
     return (
@@ -111,7 +111,7 @@ export default function BlogPage() {
     if (!html) return '';
 
     // Modern magazine text formatting
-    let formatted = html
+    const formatted = html
       // Headings
       .replace(/<h1/g, '<h1 class="text-4xl font-bold mb-6 leading-tight break-words"')
       .replace(/<h2/g, '<h2 class="text-3xl font-bold mb-5 mt-12 break-words"')

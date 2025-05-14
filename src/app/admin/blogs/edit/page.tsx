@@ -2,13 +2,21 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+
+interface Blog {
+  id: number;
+  title: string;
+  description: string | null;
+  cover_image: string;
+}
 
 export default function EditListPage() {
-  const [blogs, setBlogs] = useState<any[]>([]);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
 
   useEffect(() => {
     async function fetchBlogs() {
-      const res = await fetch('/api/contenty'); // ✅ fixed typo
+      const res = await fetch('/api/contenty');
       if (res.ok) {
         const data = await res.json();
         setBlogs(data);
@@ -20,8 +28,14 @@ export default function EditListPage() {
   }, []);
 
   // Function to remove HTML tags from description
-  const stripHtml = (html: string) => {
-    return html.replace(/<[^>]+>/g, '');
+  const stripHtml = (html: string | null | undefined) => {
+    return html ? html.replace(/<[^>]+>/g, '') : ''; // If html is null/undefined, return an empty string
+  };
+
+  // Function to check if a URL is a video
+  const isVideo = (url: string) => {
+    const videoExtensions = ['.mp4', '.mov', '.avi', '.webm'];
+    return videoExtensions.some(ext => url.toLowerCase().endsWith(ext));
   };
 
   return (
@@ -35,11 +49,21 @@ export default function EditListPage() {
             className="border p-4 hover:bg-gray-100 rounded flex items-center gap-4"
           >
             {blog.cover_image && (
-              <img
-                src={blog.cover_image}
-                alt={blog.title}
-                className="w-24 h-24 object-cover rounded"
-              />
+              isVideo(blog.cover_image) ? (
+                <video
+                  src={blog.cover_image}
+                  className="w-24 h-24 object-cover rounded"
+                  controls
+                />
+              ) : (
+                <Image
+                  src={blog.cover_image}
+                  alt={blog.title}
+                  width={96} // Set the desired width
+                  height={96} // Set the desired height
+                  className="object-cover rounded"
+                />
+              )
             )}
             <div>
               <h2 className="text-xl font-semibold">{blog.title}</h2>

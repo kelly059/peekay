@@ -5,6 +5,17 @@ import { randomUUID } from 'crypto';
 
 const prisma = new PrismaClient();
 
+interface CloudinaryUploadResult {
+  secure_url: string;
+  public_id?: string;
+  format?: string;
+  width?: number;
+  height?: number;
+  bytes?: number;
+  created_at?: string;
+  [key: string]: unknown; // Use `unknown` instead of `any` for type safety
+}
+
 export async function GET() {
   try {
     const confessions = await prisma.content.findMany({
@@ -13,10 +24,11 @@ export async function GET() {
     });
 
     return NextResponse.json(confessions, { status: 200 });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error(error);
+    const errorMessage = error instanceof Error ? error.message : 'Failed to load confessions';
     return NextResponse.json(
-      { error: 'Failed to load confessions.' },
+      { error: errorMessage },
       { status: 500 }
     );
   }
@@ -30,7 +42,10 @@ export async function POST(req: Request) {
     const coverImage = formData.get('cover_image') as File | null;
 
     if (!title || !description) {
-      return NextResponse.json({ error: 'Title and description are required.' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Title and description are required.' },
+        { status: 400 }
+      );
     }
 
     let coverImageUrl: string | null = null;
@@ -40,7 +55,7 @@ export async function POST(req: Request) {
       const filename = `${Date.now()}_${coverImage.name.replace(/\s+/g, '_')}_${randomUUID()}`;
 
       try {
-        const uploadResult = await new Promise<any>((resolve, reject) => {
+        const uploadResult = await new Promise<CloudinaryUploadResult>((resolve, reject) => {
           cloudinary.uploader.upload_stream(
             {
               resource_type: 'image',
@@ -49,16 +64,18 @@ export async function POST(req: Request) {
             },
             (error, result) => {
               if (error) return reject(error);
-              resolve(result);
+              if (!result) return reject(new Error('No result from Cloudinary'));
+              resolve(result as CloudinaryUploadResult);
             }
           ).end(buffer);
         });
 
         coverImageUrl = uploadResult.secure_url;
-      } catch (err) {
+      } catch (err: unknown) {
         console.error('Cloudinary upload error:', err);
+        const errorMessage = err instanceof Error ? err.message : 'Failed to upload image to Cloudinary';
         return NextResponse.json(
-          { error: 'Failed to upload image to Cloudinary.' },
+          { error: errorMessage },
           { status: 500 }
         );
       }
@@ -74,10 +91,11 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json(confession, { status: 201 });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error(error);
+    const errorMessage = error instanceof Error ? error.message : 'Failed to create confession';
     return NextResponse.json(
-      { error: 'Failed to create confession.' },
+      { error: errorMessage },
       { status: 500 }
     );
   }
