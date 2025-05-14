@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient, Comment as PrismaComment } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import prisma from '@/lib/db';
+import type { Comment as PrismaComment } from '@prisma/client';
 
 // Improved type for error details
 type ErrorDetails = Record<string, unknown> | string;
