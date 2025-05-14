@@ -56,7 +56,8 @@ export async function GET(request: Request) {
       return errorResponse('Unexpected data format received for comments', 500, comments);
     }
 
-    const rootComments = comments.filter((c) => !c.parentId);
+    // Fix: Add explicit type to the parameter
+    const rootComments = comments.filter((c: NestedComment) => !c.parentId);
 
     return NextResponse.json({
       success: true,
@@ -95,7 +96,7 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json(
-      { success: true, data: formatComment(newComment) },
+      { success: true, data: formatComment(newComment as NestedComment) },
       { status: 201 }
     );
   } catch (error) {
