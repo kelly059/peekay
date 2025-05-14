@@ -1,6 +1,7 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "./node_modules/@prisma/client"
+  // Avoid specifying the output path in node_modules
+  // Prisma will automatically handle the output location for the Prisma client
 }
 
 datasource db {
@@ -23,7 +24,7 @@ model Content {
   slug        String?   @unique
   type        String    @default("blog")
   likes       Int       @default(0)
-  comments    Comment[]
+  comments    Comment[] // One-to-many relation with Comment
 }
 
 model Comment {
