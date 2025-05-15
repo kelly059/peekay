@@ -4,6 +4,7 @@ import prisma from '@/lib/db';
 import cloudinary from '@/lib/cloudinary';
 import { writeFile, unlink, mkdir } from 'fs/promises';
 import { join } from 'path';
+import os from 'os';  // <-- Added this import
 
 export const config = {
   api: {
@@ -46,7 +47,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Save to temporary location
-    const tempDir = join(process.cwd(), 'temp');
+    const tempDir = join(os.tmpdir(), 'temp');  // <-- Changed this line
     await mkdir(tempDir, { recursive: true });
 
     const bytes = await file.arrayBuffer();
