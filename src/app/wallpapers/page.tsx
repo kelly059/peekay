@@ -81,7 +81,7 @@ export default function ExplorePage() {
 
     setLoading(true);
     try {
-      const res = await fetch(`/api/searchy?query=${encodeURIComponent(searchQuery)}&type=wallpaper`);
+      const res = await fetch(`/api/search?query=${encodeURIComponent(searchQuery)}&type=wallpaper`);
       const data = await res.json();
 
       if (data.success) {
@@ -246,21 +246,23 @@ export default function ExplorePage() {
             </form>
           </header>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+          {/* Updated Masonry Layout with your requested columns */}
+          <div className="columns-2 sm:columns-3 lg:columns-4 xl:columns-5 gap-3 sm:gap-4 lg:gap-6 space-y-3 sm:space-y-4 lg:space-y-6">
             {filteredWallpapers.map((wallpaper) => (
               <div
                 key={wallpaper.id}
-                className="group relative overflow-hidden rounded-xl bg-indigo-900/20 border border-indigo-700/50 hover:border-cyan-400/30 transition-all duration-500 hover:shadow-xl hover:shadow-cyan-500/10"
+                className="break-inside-avoid group relative mb-3 sm:mb-4 lg:mb-6 overflow-hidden rounded-xl bg-indigo-900/20 border border-indigo-700/50 hover:border-cyan-400/30 transition-all duration-500 hover:shadow-xl hover:shadow-cyan-500/10"
                 itemScope
                 itemType="https://schema.org/ImageObject"
               >
-                <div className="relative overflow-hidden h-80">
+                <div className="relative overflow-hidden aspect-auto">
                   <Image
                     src={wallpaper.image_url}
                     alt={wallpaper.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    width={600}
+                    height={900}
+                    className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
                     quality={85}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
@@ -325,6 +327,11 @@ export default function ExplorePage() {
           }
           body {
             background-color: #1e1b4b;
+          }
+          /* Ensure images don't break across columns */
+          .break-inside-avoid {
+            break-inside: avoid;
+            page-break-inside: avoid;
           }
         `}</style>
       </div>
