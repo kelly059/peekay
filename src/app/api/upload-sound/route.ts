@@ -2,10 +2,20 @@ import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import cloudinary from '@/lib/cloudinary';
 
+// Disable the default body parser to handle FormData
+export const config = {
+  api: {
+    bodyParser: false, // Disable the default body parser
+  },
+  // Alternatively, you can set size limit like this (but bodyParser: false is often needed for file uploads)
+  // maxBodyLength: 100 * 1024 * 1024, // 100MB
+};
+
 const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
   try {
+    // Get the form data
     const formData = await req.formData();
 
     const title = formData.get('title') as string;
@@ -18,27 +28,39 @@ export async function POST(req: Request) {
       );
     }
 
-    // Upload video to Cloudinary
+    // Check file size (optional but recommended)
+    const maxSize = 100 * 1024 * 1024; // 100MB
+    if (videoFile.size > maxSize) {
+      return NextResponse.json(
+        { error: 'File size exceeds the 100MB limit.' },
+        { status: 413 }
+      );
+    }
+
+    // Upload the file to Cloudinary
     const videoUrl = await uploadToCloudinary(videoFile);
 
-    // Store in database
+    // Save video metadata to the database
     const content = await prisma.content.create({
       data: {
         title,
         video_url: videoUrl,
-        type: 'sound', // ✅ "sound" content type
-        cover_image: '', // Optional: set to null or empty if schema allows
+        type: 'sound',
+        cover_image: '',
       },
     });
 
     return NextResponse.json({ success: true, content }, { status: 201 });
   } catch (error) {
     console.error('Upload failed:', error);
-    return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Upload failed', details: error instanceof Error ? error.message : String(error) },
+      { status: 500 }
+    );
   }
 }
 
-// Upload file to Cloudinary
+// Helper function to upload a File object to Cloudinary
 const uploadToCloudinary = async (file: File): Promise<string> => {
   const buffer = Buffer.from(await file.arrayBuffer());
   const filename = `${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
@@ -51,7 +73,7 @@ const uploadToCloudinary = async (file: File): Promise<string> => {
       },
       (error, result) => {
         if (error || !result?.secure_url) {
-          return reject(error || new Error('Failed to upload'));
+          return reject(error || new Error('Failed to upload to Cloudinary'));
         }
         resolve(result.secure_url);
       }
