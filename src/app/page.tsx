@@ -152,7 +152,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className={`min-h-screen transition-colors duration-500 ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'} overflow-x-hidden`}>
+    <div className={`min-h-screen transition-colors duration-500 ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
       <Head>
         {/* Primary Meta Tags */}
         <title>lirivelle | 🖼 Wallpapers 🕵 Confessions 💋 Whispers 📝 Blogs</title>
@@ -160,7 +160,51 @@ export default function LandingPage() {
           name="description" 
           content="🎧 Relaxing Sounds ❤ Heart Talk 🐾 Pet Lovers - Your sanctuary for confessions, HD wallpapers, mental wellness, and emotional support. Join lirivelle today!" 
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="keywords" content="🖼 Wallpapers, 🕵 Confessions, 💋 Whispers, 📝 Blogs, 🎧 Relaxing Sounds, ❤ Heart Talk, 🐾 Pet Lovers, anonymous confessions, HD wallpapers, poetic whispers, self-care, mental wellness, emotional support, stress relief" />
+        <meta name="author" content="lirivelle" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:title" content="lirivelle | 🖼 Wallpapers 🕵 Confessions 💋 Whispers" />
+        <meta property="og:description" content="📝 Blogs 🎧 Relaxing Sounds ❤ Heart Talk 🐾 Pet Lovers - Your digital sanctuary for authentic sharing and mental wellness" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://lirivelle.com" />
+        <meta property="og:image" content="https://lirivelle.com/images/website_imagepreview.jpg" />
+        <meta property="og:site_name" content="lirivelle" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="lirivelle | Content Sanctuary" />
+        <meta name="twitter:description" content="🖼 Wallpapers 🕵 Confessions 💋 Whispers 📝 Blogs 🎧 Sounds ❤ Heart Talk - Join our community" />
+        <meta name="twitter:image" content="https://lirivelle.com/public/images/website_imagepreview.jpg" />
+        <meta name="twitter:creator" content="@lirivelle" />
+        
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://lirivelle.com" />
+        
+        {/* Favicon */}
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        
+        {/* Theme Color */}
+        <meta name="theme-color" content="#FFFFFF" />
+        <meta name="msapplication-TileColor" content="#FFFFFF" />
+        
+        {/* Schema.org markup */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "lirivelle",
+            "url": "https://lirivelle.com",
+            "description": "A digital sanctuary offering 🖼 Wallpapers, 🕵 Confessions, 💋 Whispers, 📝 Blogs, 🎧 Relaxing Sounds, ❤ Heart Talk, and 🐾 Pet Lovers community",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://lirivelle.com/search?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          })}
+        </script>
       </Head>
 
       {/* Header */}
@@ -172,7 +216,7 @@ export default function LandingPage() {
             exit={{ y: -100 }}
             className="fixed w-full z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80 shadow-sm"
           >
-            <div className="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+            <div className="container mx-auto px-6 py-3 flex justify-between items-center">
               <motion.a 
                 href="#home"
                 initial={{ opacity: 0 }}
@@ -182,17 +226,17 @@ export default function LandingPage() {
               >
                 <span className="font-medium italic">lirivelle</span> love
               </motion.a>
-              <div className="flex items-center space-x-2 sm:space-x-4">
+              <div className="flex items-center space-x-4">
                 <button 
                   onClick={handleDonateClick}
-                  className="px-3 sm:px-4 py-1 sm:py-2 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white text-sm hover:shadow-lg transition-all"
+                  className="px-4 py-2 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white text-sm hover:shadow-lg transition-all"
                   aria-label="Donate to support us"
                 >
                   Donate
                 </button>
                 <button 
                   onClick={handleShareClick}
-                  className="px-3 sm:px-4 py-1 sm:py-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-sm hover:shadow-lg transition-all relative"
+                  className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-sm hover:shadow-lg transition-all relative"
                   aria-label="Share this page"
                 >
                   Share
@@ -209,14 +253,14 @@ export default function LandingPage() {
                 </button>
                 <button 
                   onClick={() => handleAuthClick('login')}
-                  className="px-3 sm:px-4 py-1 sm:py-2 rounded-full border border-gray-300 dark:border-gray-600 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+                  className="px-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
                   aria-label="Log in to your account"
                 >
                   Log In
                 </button>
                 <button 
                   onClick={() => setDarkMode(!darkMode)}
-                  className="p-1 sm:p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-300"
+                  className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-300"
                   aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
                 >
                   {darkMode ? '☀️' : '🌙'}
@@ -226,7 +270,7 @@ export default function LandingPage() {
           </motion.header>
         ) : (
           <header className="fixed w-full z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80">
-            <div className="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+            <div className="container mx-auto px-6 py-3 flex justify-between items-center">
               <a 
                 href="#home" 
                 className="text-xl font-light hover:scale-105 transition-transform"
@@ -234,17 +278,17 @@ export default function LandingPage() {
               >
                 <span className="font-medium italic">lirivelle</span> pl
               </a>
-              <div className="flex items-center space-x-2 sm:space-x-4">
+              <div className="flex items-center space-x-4">
                 <button 
                   onClick={handleDonateClick}
-                  className="px-3 sm:px-4 py-1 sm:py-2 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white text-sm hover:shadow-lg transition-all"
+                  className="px-4 py-2 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white text-sm hover:shadow-lg transition-all"
                   aria-label="Donate to support us"
                 >
                   Donate
                 </button>
                 <button 
                   onClick={handleShareClick}
-                  className="px-3 sm:px-4 py-1 sm:py-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-sm hover:shadow-lg transition-all relative"
+                  className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-sm hover:shadow-lg transition-all relative"
                   aria-label="Share this page"
                 >
                   Share
@@ -261,14 +305,14 @@ export default function LandingPage() {
                 </button>
                 <button 
                   onClick={() => handleAuthClick('login')}
-                  className="px-3 sm:px-4 py-1 sm:py-2 rounded-full border border-gray-300 dark:border-gray-600 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+                  className="px-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
                   aria-label="Log in to your account"
                 >
                   Log In
                 </button>
                 <button 
                   onClick={() => setDarkMode(!darkMode)}
-                  className="p-1 sm:p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-300"
+                  className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-300"
                   aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
                 >
                   {darkMode ? '☀️' : '🌙'}
@@ -289,7 +333,7 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light mb-6 sm:mb-8 text-gray-900 dark:text-white px-4"
+              className="text-5xl md:text-7xl lg:text-8xl font-light mb-8 text-gray-900 dark:text-white"
             >
               <span className="font-medium italic bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
                 lirivelle
@@ -300,7 +344,7 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-12 sm:mb-16 px-4"
+              className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-16"
             >
               Your digital sanctuary for 🖼 Wallpapers, 🕵 Confessions, 💋 Whispers, and ❤ Heart Talk
             </motion.p>
@@ -309,7 +353,7 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="w-full max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4"
+              className="w-full max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
             >
               {features.map((feature, index) => (
                 <motion.a 
@@ -318,7 +362,11 @@ export default function LandingPage() {
                   whileHover={{ y: -8, scale: 1.03 }}
                   onMouseEnter={() => setActiveFeature(index)}
                   onMouseLeave={() => setActiveFeature(null)}
-                  className={`p-4 rounded-2xl ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border transition-all duration-300 shadow-lg hover:shadow-xl`}
+                  className={`p-4 rounded-2xl backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border transition-all duration-300 ${
+                    activeFeature === index 
+                      ? 'border-white/40 dark:border-gray-600/70 shadow-xl scale-105'
+                      : 'border-white/20 dark:border-gray-700/50 shadow-lg'
+                  }`}
                   aria-label={`Explore ${feature.title}`}
                 >
                   <div className={`text-3xl mb-2 ${feature.highlight}`} aria-hidden="true">{feature.icon}</div>
@@ -341,25 +389,25 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="mt-12 sm:mt-16 flex flex-col sm:flex-row justify-center gap-4 px-4"
+              className="mt-16 flex flex-col sm:flex-row justify-center gap-4"
             >
               <button 
                 onClick={() => handleAuthClick('signup')}
-                className="px-6 sm:px-8 py-2 sm:py-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+                className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300"
                 aria-label="Get started with lirivelle"
               >
                 Get Started
               </button>
               <button 
                 onClick={handleDonateClick}
-                className="px-6 sm:px-8 py-2 sm:py-3 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+                className="px-8 py-3 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
                 aria-label="Support our platform"
               >
                 <span aria-hidden="true">💛</span> Support Us
               </button>
               <button 
                 onClick={handleShareClick}
-                className="px-6 sm:px-8 py-2 sm:py-3 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 relative"
+                className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 relative"
                 aria-label="Share lirivelle"
               >
                 Share
@@ -379,23 +427,23 @@ export default function LandingPage() {
         </section>
 
         {/* Features Section */}
-        <section className="py-20 sm:py-28 relative" id="features">
+        <section className="py-28 relative" id="features">
           <div className="absolute inset-0 -z-10 opacity-20 dark:opacity-30">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/30 via-transparent to-transparent"></div>
           </div>
           
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="max-w-7xl mx-auto px-6">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="text-2xl sm:text-3xl md:text-5xl font-light mb-16 sm:mb-20 text-center text-gray-900 dark:text-white px-4"
+              className="text-3xl md:text-5xl font-light mb-20 text-center text-gray-900 dark:text-white"
             >
               Carefully curated <span className="font-medium">experiences</span>
             </motion.h2>
             
-            <div className="space-y-16 sm:space-y-24 px-4 sm:px-0">
+            <div className="space-y-24">
               {features.map((feature, index) => (
                 <motion.article 
                   key={feature.title}
@@ -403,28 +451,28 @@ export default function LandingPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true, margin: "-100px" }}
-                  className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 sm:gap-12`}
+                  className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12`}
                 >
                   <div className={`flex-1 flex justify-center ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
                     <a href={feature.link} className="group" aria-label={`Explore ${feature.title}`}>
-                      <div className={`w-32 h-32 sm:w-48 sm:h-48 rounded-3xl flex items-center justify-center text-5xl sm:text-7xl bg-gradient-to-br ${feature.gradient} shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105`}>
+                      <div className={`w-48 h-48 rounded-3xl flex items-center justify-center text-7xl bg-gradient-to-br ${feature.gradient} shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105`}>
                         <span aria-hidden="true">{feature.icon}</span>
                       </div>
                     </a>
                   </div>
                   <div className="flex-1">
                     <a href={feature.link}>
-                      <h3 className="text-2xl sm:text-3xl font-medium mb-3 sm:mb-4 text-gray-900 dark:text-white hover:underline">
+                      <h3 className="text-3xl font-medium mb-4 text-gray-900 dark:text-white hover:underline">
                         <span className={`bg-clip-text text-transparent bg-gradient-to-r ${feature.gradient}`}>
                           {feature.title}
                         </span>
                       </h3>
                     </a>
-                    <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 leading-relaxed">{feature.description}</p>
-                    <div className="mt-4 sm:mt-6">
+                    <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">{feature.description}</p>
+                    <div className="mt-6">
                       <a 
                         href={feature.link}
-                        className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-gradient-to-r ${feature.gradient} text-white hover:shadow-lg transition-all inline-block`}
+                        className={`px-6 py-3 rounded-full bg-gradient-to-r ${feature.gradient} text-white hover:shadow-lg transition-all inline-block`}
                         aria-label={`Explore ${feature.title}`}
                       >
                         Explore {feature.title}
@@ -438,18 +486,18 @@ export default function LandingPage() {
         </section>
 
         {/* Donation Section */}
-        <section className="py-16 sm:py-24 relative overflow-hidden bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <section className="py-24 relative overflow-hidden bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20">
+          <div className="max-w-4xl mx-auto px-6 text-center">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-light mb-4 sm:mb-6 text-gray-900 dark:text-white">
+              <h2 className="text-4xl md:text-5xl font-light mb-6 text-gray-900 dark:text-white">
                 Love what we do? <span className="font-medium">Support us!</span>
               </h2>
-              <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-6 sm:mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
                 Your donations help keep lirivelle free and accessible for everyone.
               </p>
               <div className="flex justify-center">
@@ -460,7 +508,7 @@ export default function LandingPage() {
                 >
                   <button 
                     onClick={handleDonateClick}
-                    className="px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 mx-auto"
+                    className="px-8 py-4 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 mx-auto"
                     aria-label="Donate to support our platform"
                   >
                     <span aria-hidden="true">💛</span> Donate Now
@@ -472,22 +520,22 @@ export default function LandingPage() {
         </section>
 
         {/* Contact Section */}
-        <section className="py-20 sm:py-36 relative overflow-hidden" id="contact">
+        <section className="py-36 relative overflow-hidden" id="contact">
           <div className="absolute inset-0 -z-10">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent animate-pulse"></div>
           </div>
           
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <div className="max-w-4xl mx-auto px-6 text-center">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-light mb-6 sm:mb-8 text-gray-900 dark:text-white">
+              <h2 className="text-4xl md:text-5xl font-light mb-8 text-gray-900 dark:text-white">
                 Questions? <span className="font-medium">Contact us</span>
               </h2>
-              <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-8 sm:mb-12">
+              <p className="text-xl text-gray-600 dark:text-gray-400 mb-12">
                 We&apos;re here to help with any questions you might have.
               </p>
               
@@ -498,7 +546,7 @@ export default function LandingPage() {
               >
                 <button 
                   onClick={handleContactClick}
-                  className="px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="px-8 py-4 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                   aria-label="Contact our team"
                 >
                   Contact Page
@@ -509,28 +557,28 @@ export default function LandingPage() {
         </section>
       </main>
 
-      <footer className="py-8 sm:py-12 border-t border-gray-200 dark:border-gray-800 backdrop-blur-md">
-        <div className="container mx-auto px-4 sm:px-6">
+      <footer className="py-12 border-t border-gray-200 dark:border-gray-800 backdrop-blur-md">
+        <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <a 
               href="#home" 
-              className="text-xl font-light mb-4 md:mb-0 hover:scale-105 transition-transform"
+              className="text-xl font-light mb-6 md:mb-0 hover:scale-105 transition-transform"
               aria-label="lirivelle Home"
             >
               <span className="font-medium italic">lirivelle</span> love
             </a>
             
-            <div className="flex gap-2 sm:gap-4">
+            <div className="flex gap-4">
               <button 
                 onClick={handleDonateClick}
-                className="px-4 sm:px-6 py-1 sm:py-2 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white hover:shadow-lg transition-all"
+                className="px-6 py-2 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white hover:shadow-lg transition-all"
                 aria-label="Donate to support us"
               >
                 Donate
               </button>
               <button 
                 onClick={handleShareClick}
-                className="px-4 sm:px-6 py-1 sm:py-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white hover:shadow-lg transition-all relative"
+                className="px-6 py-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white hover:shadow-lg transition-all relative"
                 aria-label="Share this page"
               >
                 Share
@@ -547,7 +595,7 @@ export default function LandingPage() {
               </button>
               <button 
                 onClick={() => handleAuthClick('login')}
-                className="px-4 sm:px-6 py-1 sm:py-2 rounded-full border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+                className="px-6 py-2 rounded-full border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
                 aria-label="Log in to your account"
               >
                 Log In
@@ -555,7 +603,7 @@ export default function LandingPage() {
             </div>
           </div>
           
-          <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-100 dark:border-gray-800 text-center text-gray-500 dark:text-gray-400 text-sm">
+          <div className="mt-12 pt-8 border-t border-gray-100 dark:border-gray-800 text-center text-gray-500 dark:text-gray-400 text-sm">
             <p>© {new Date().getFullYear()} lirivelle. All rights reserved.</p>
           </div>
         </div>
