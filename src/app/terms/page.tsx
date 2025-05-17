@@ -24,7 +24,7 @@ export default function TermsPage() {
                 Welcome to Our Digital Sanctuary
               </h2>
               <p className="mb-4">
-                Lirrivelle is a carefully curated collection of content I've gathered to create a peaceful online space. By accessing or using this website, you acknowledge that you have read, understood, and agree to be bound by these Terms of Use and our <Link href="/privacy-policy" className="text-pink-600 hover:underline">Privacy Policy</Link>. If you don't agree with any part of these terms, please refrain from using our site.
+                Lirrivelle is a carefully curated collection of content I&apos;ve gathered to create a peaceful online space. By accessing or using this website, you acknowledge that you have read, understood, and agree to be bound by these Terms of Use and our <Link href="/privacy-policy" className="text-pink-600 hover:underline">Privacy Policy</Link>. If you don&apos;t agree with any part of these terms, please refrain from using our site.
               </p>
               <p>
                 This is a personal, non-commercial project created for sharing beautiful things. While we strive to maintain accuracy and quality, we make no representations or warranties of any kind about the completeness or reliability of any content.
@@ -45,7 +45,7 @@ export default function TermsPage() {
                 <li><strong>User-submitted content</strong> (when applicable) remains property of the original creator</li>
               </ul>
               <p>
-                If you believe any content infringes on your rights, please <Link href="/contact" className="text-pink-600 hover:underline">contact us</Link> immediately with details and we'll address your concerns promptly.
+                If you believe any content infringes on your rights, please <Link href="/contact" className="text-pink-600 hover:underline">contact us</Link> immediately with details and we&apos;ll address your concerns promptly.
               </p>
             </section>
 
@@ -54,7 +54,7 @@ export default function TermsPage() {
                 Permitted Uses of Our Content
               </h2>
               <p className="mb-4">
-                You're welcome to:
+                You&apos;re welcome to:
               </p>
               <ul className="list-disc pl-6 mb-4 space-y-3">
                 <li>View and enjoy all content for personal, non-commercial purposes</li>
@@ -97,7 +97,7 @@ export default function TermsPage() {
                 Currently, Lirrivelle does not accept unsolicited content submissions. All content is personally curated by the site owner. This policy helps maintain quality control and ensures proper attribution for all shared works.
               </p>
               <p>
-                If you're interested in collaborating or having your work considered for inclusion, please <Link href="/contact" className="text-pink-600 hover:underline">contact us</Link> with details about your content and how you'd like it to be featured.
+                If you&apos;re interested in collaborating or having your work considered for inclusion, please <Link href="/contact" className="text-pink-600 hover:underline">contact us</Link> with details about your content and how you&apos;d like it to be featured.
               </p>
             </section>
 
@@ -109,9 +109,9 @@ export default function TermsPage() {
                 Lirrivelle may contain links to external websites or resources. These links are provided for convenience only, and we:
               </p>
               <ul className="list-disc pl-6 mb-4 space-y-3">
-                <li>Don't endorse or assume responsibility for any third-party content</li>
-                <li>Aren't responsible for the accuracy or legality of external sites</li>
-                <li>Don't guarantee the availability or quality of external resources</li>
+                <li>Don&apos;t endorse or assume responsibility for any third-party content</li>
+                <li>Aren&apos;t responsible for the accuracy or legality of external sites</li>
+                <li>Don&apos;t guarantee the availability or quality of external resources</li>
               </ul>
               <p>
                 When leaving our site, we recommend reviewing the terms and privacy policies of any third-party sites you visit.
@@ -126,7 +126,7 @@ export default function TermsPage() {
                 We may update these Terms of Use periodically to reflect changes in our practices or legal requirements. When we make changes:
               </p>
               <ul className="list-disc pl-6 mb-4 space-y-3">
-                <li>We'll update the "Last updated" date at the bottom of this page</li>
+                <li>We&apos;ll update the &quot;Last updated&quot; date at the bottom of this page</li>
                 <li>Material changes will be announced on our homepage for 30 days</li>
                 <li>Your continued use after changes constitutes acceptance of the new terms</li>
               </ul>
@@ -134,25 +134,6 @@ export default function TermsPage() {
                 We encourage you to review these terms occasionally to stay informed about your rights and responsibilities when using Lirrivelle.
               </p>
             </section>
-
-            <section className="mb-10 bg-pink-50 rounded-lg p-6">
-              <h2 className="text-xl sm:text-2xl font-semibold mb-4 text-pink-600">
-                Contact Information
-              </h2>
-              <p className="mb-4">
-                For questions about these Terms of Use, content removal requests, or other concerns:
-              </p>
-              <ul className="list-disc pl-6 space-y-2">
-                <li>Use our <Link href="/contact" className="text-pink-600 hover:underline">contact form</Link></li>
-                <li>Response time: Typically within 3-5 business days</li>
-                <li>Please include "Terms Inquiry" in your message</li>
-              </ul>
-            </section>
-
-            <div className="mt-12 pt-6 border-t border-gray-200 text-sm text-gray-500">
-              <p>Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
-              <p className="mt-2">Lirrivelle is a personal passion project created to share beauty and inspiration. Thank you for being part of our community.</p>
-            </div>
           </div>
         </div>
       </main>

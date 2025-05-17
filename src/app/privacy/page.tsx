@@ -72,7 +72,7 @@ export default function PrivacyPolicyPage() {
                 <ul className="list-disc pl-6 space-y-3">
                   <li><strong>Secure Connections:</strong> HTTPS encryption everywhere</li>
                   <li><strong>Minimal Data:</strong> We only collect what we need</li>
-                  <li><strong>No Tracking:</strong> We don't use invasive tracking</li>
+                  <li><strong>No Tracking:</strong> We don&apos;t use invasive tracking</li>
                   <li><strong>Regular Cleaning:</strong> Old data is automatically purged</li>
                 </ul>
               </div>
@@ -121,7 +121,7 @@ export default function PrivacyPolicyPage() {
 
             <section className="mb-10">
               <h2 className="text-xl sm:text-2xl font-semibold mb-4 text-pink-500">
-                Children's Privacy
+                Children&apos;s Privacy
               </h2>
               <p>
                 Lirrivelle is not directed at children under 13. We do not knowingly collect any information from children.
@@ -137,7 +137,6 @@ export default function PrivacyPolicyPage() {
               </p>
             </section>
 
-            {/* ✅ Inserted Ezoic Section */}
             <section className="mb-10">
               <h2 className="text-xl sm:text-2xl font-semibold mb-4 text-pink-500">
                 Ezoic and Third-Party Services
@@ -146,7 +145,7 @@ export default function PrivacyPolicyPage() {
                 This website may use third-party platforms, including Ezoic, to improve performance, personalize content, and serve relevant advertisements. These services may use cookies or similar technologies to collect data about your visit, such as browser type, IP address, and pages visited.
               </p>
               <p className="mt-2">
-                For more information, you can view Ezoic’s privacy policy at{' '}
+                For more information, you can view Ezoic&apos;s privacy policy at{' '}
                 <a
                   href="https://g.ezoic.net/privacy/lirrivelle.com"
                   className="text-pink-600 underline"
@@ -167,7 +166,7 @@ export default function PrivacyPolicyPage() {
               </p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>Use our <Link href="/contact" className="text-pink-600 underline">contact form</Link></li>
-                <li>Include "Privacy Request" in your message</li>
+                <li>Include &quot;Privacy Request&quot; in your message</li>
                 <li>Allow 3-5 business days for response</li>
               </ul>
             </section>
