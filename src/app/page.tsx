@@ -227,6 +227,11 @@ export default function LandingPage() {
                 <span className="font-medium italic">lirivelle</span> love
               </motion.a>
               <div className="flex items-center space-x-4">
+                <div className="hidden md:flex items-center space-x-4 mr-4">
+                  <a href="/about" className="text-sm hover:underline" aria-label="About lirivelle">About</a>
+                  <a href="/privacy" className="text-sm hover:underline" aria-label="Privacy Policy">Privacy</a>
+                  <a href="/terms" className="text-sm hover:underline" aria-label="Terms & Conditions">Terms</a>
+                </div>
                 <button 
                   onClick={handleDonateClick}
                   className="px-4 py-2 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white text-sm hover:shadow-lg transition-all"
@@ -279,6 +284,11 @@ export default function LandingPage() {
                 <span className="font-medium italic">lirivelle</span> pl
               </a>
               <div className="flex items-center space-x-4">
+                <div className="hidden md:flex items-center space-x-4 mr-4">
+                  <a href="/about" className="text-sm hover:underline" aria-label="About lirivelle">About</a>
+                  <a href="/privacy" className="text-sm hover:underline" aria-label="Privacy Policy">Privacy</a>
+                  <a href="/terms" className="text-sm hover:underline" aria-label="Terms & Conditions">Terms</a>
+                </div>
                 <button 
                   onClick={handleDonateClick}
                   className="px-4 py-2 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white text-sm hover:shadow-lg transition-all"
@@ -567,6 +577,13 @@ export default function LandingPage() {
             >
               <span className="font-medium italic">lirivelle</span> love
             </a>
+            
+            <div className="flex flex-wrap justify-center gap-4 mb-6 md:mb-0">
+              <a href="/about" className="text-sm hover:underline" aria-label="About lirivelle">About</a>
+              <a href="/privacy" className="text-sm hover:underline" aria-label="Privacy Policy">Privacy Policy</a>
+              <a href="/terms" className="text-sm hover:underline" aria-label="Terms & Conditions">Terms & Conditions</a>
+              <a href="/contact" className="text-sm hover:underline" aria-label="Contact Us">Contact</a>
+            </div>
             
             <div className="flex gap-4">
               <button 
