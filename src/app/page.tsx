@@ -362,21 +362,21 @@ export default function LandingPage() {
                   whileHover={{ y: -8, scale: 1.03 }}
                   onMouseEnter={() => setActiveFeature(index)}
                   onMouseLeave={() => setActiveFeature(null)}
-                  className={`p-4 rounded-2xl backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border transition-all duration-300 ${
+                  className={`p-4 rounded-2xl backdrop-blur-md bg-white dark:bg-gray-800 border transition-all duration-300 ${
                     activeFeature === index 
                       ? 'border-white/40 dark:border-gray-600/70 shadow-xl scale-105'
                       : 'border-white/20 dark:border-gray-700/50 shadow-lg'
                   }`}
                   aria-label={`Explore ${feature.title}`}
                 >
-                  <div className={`text-3xl mb-2 ${feature.highlight}`} aria-hidden="true">{feature.icon}</div>
+                  <div className={`text-3xl mb-2 font-medium ${feature.highlight}`} aria-hidden="true">{feature.icon}</div>
                   <h2 className="text-md font-medium text-gray-900 dark:text-white">{feature.title}</h2>
                   {activeFeature === index && (
                     <motion.p 
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
-                      className="mt-1 text-xs text-gray-600 dark:text-gray-400"
+                      className="mt-1 text-xs text-gray-700 dark:text-gray-300"
                     >
                       {feature.description}
                     </motion.p>
