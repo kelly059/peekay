@@ -1,44 +1,31 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/db';
 
+export const revalidate = 3600; // Cache for 1 hour
+
 export async function GET() {
   try {
-    console.log('Fetching blog posts...');
-
+    console.time('Fetching blog posts');
     const blogs = await prisma.content.findMany({
-      where: {
-        type: 'blog', // ✅ Filter by type
-      },
-      orderBy: {
-        created_at: 'desc',
-      },
+      where: { type: 'blog' },
+      orderBy: { created_at: 'desc' },
       take: 10,
       select: {
         id: true,
         title: true,
-        description: true,
+        description: true, // For preview text
         image_url: true,
-        video_url: true,
-        extra_links: true,
-        tags: true,
-        category: true,
         created_at: true,
-        type: true, // ✅ Include type in result if needed
+        is_featured: true,
+        // Removed: is_trending (it does not exist in your schema)
       },
     });
-
-    console.log('Fetched blogs:', blogs);
-
+    console.timeEnd('Fetching blog posts');
     return NextResponse.json(blogs || []);
   } catch (error) {
     console.error('❌ Failed to fetch blogs:', error);
-
     return NextResponse.json(
-      {
-        error: 'Internal Server Error',
-        message: error instanceof Error ? error.message : 'An unknown error occurred',
-        details: process.env.NODE_ENV === 'development' ? error : undefined,
-      },
+      { error: 'Internal Server Error', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   }

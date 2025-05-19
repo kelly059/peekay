@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { FiDownload, FiSave, FiSearch, FiStar } from 'react-icons/fi';
+import { FiDownload, FiSave, FiSearch, FiStar, FiX } from 'react-icons/fi';
 import { FaGalacticRepublic } from 'react-icons/fa';
 import Image from 'next/image';
 import Head from 'next/head';
@@ -21,6 +21,7 @@ export default function ExplorePage() {
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [savedImages, setSavedImages] = useState<string[]>([]);
+  const [selectedWallpaper, setSelectedWallpaper] = useState<Wallpaper | null>(null);
 
   // SEO Metadata
   const pageTitle = "Nebula Visuals | HD Cosmic Wallpapers & Aesthetic Backgrounds";
@@ -131,6 +132,16 @@ export default function ExplorePage() {
     } catch (error) {
       console.error('Save error:', error);
     }
+  };
+
+  const openFullImage = (wallpaper: Wallpaper) => {
+    setSelectedWallpaper(wallpaper);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeFullImage = () => {
+    setSelectedWallpaper(null);
+    document.body.style.overflow = 'auto';
   };
 
   if (loading) {
@@ -246,14 +257,14 @@ export default function ExplorePage() {
             </form>
           </header>
 
-          {/* Updated Masonry Layout with your requested columns */}
           <div className="columns-2 sm:columns-3 lg:columns-4 xl:columns-5 gap-3 sm:gap-4 lg:gap-6 space-y-3 sm:space-y-4 lg:space-y-6">
             {filteredWallpapers.map((wallpaper) => (
               <div
                 key={wallpaper.id}
-                className="break-inside-avoid group relative mb-3 sm:mb-4 lg:mb-6 overflow-hidden rounded-xl bg-indigo-900/20 border border-indigo-700/50 hover:border-cyan-400/30 transition-all duration-500 hover:shadow-xl hover:shadow-cyan-500/10"
+                className="break-inside-avoid group relative mb-3 sm:mb-4 lg:mb-6 overflow-hidden rounded-xl bg-indigo-900/20 border border-indigo-700/50 hover:border-cyan-400/30 transition-all duration-500 hover:shadow-xl hover:shadow-cyan-500/10 cursor-zoom-in"
                 itemScope
                 itemType="https://schema.org/ImageObject"
+                onClick={() => openFullImage(wallpaper)}
               >
                 <div className="relative overflow-hidden aspect-auto">
                   <Image
@@ -265,7 +276,7 @@ export default function ExplorePage() {
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
                     quality={85}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
                     <div>
                       <h2 className="text-xl font-medium text-white mb-1" itemProp="name">{wallpaper.title}</h2>
                       <p className="text-sm text-cyan-100 font-light mb-3" itemProp="description">{wallpaper.description}</p>
@@ -284,9 +295,12 @@ export default function ExplorePage() {
                   </div>
                 </div>
 
-                <div className="absolute top-3 right-3 flex gap-2 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute top-3 right-3 flex gap-2 opacity-100 sm:opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <button
-                    onClick={() => handleDownload(wallpaper.image_url, wallpaper.title)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDownload(wallpaper.image_url, wallpaper.title);
+                    }}
                     className="p-2.5 bg-indigo-900/70 rounded-full hover:bg-cyan-500 transition-colors duration-200 text-white"
                     title="Download"
                     aria-label={`Download ${wallpaper.title}`}
@@ -294,7 +308,10 @@ export default function ExplorePage() {
                     <FiDownload />
                   </button>
                   <button
-                    onClick={() => handleSaveToGallery(wallpaper.id, wallpaper.image_url, wallpaper.title)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleSaveToGallery(wallpaper.id, wallpaper.image_url, wallpaper.title);
+                    }}
                     disabled={savedImages.includes(wallpaper.id)}
                     className={`p-2.5 rounded-full transition-colors duration-200 ${
                       savedImages.includes(wallpaper.id)
@@ -319,6 +336,84 @@ export default function ExplorePage() {
             </div>
           )}
         </main>
+
+        {/* Full Image View Modal */}
+        {selectedWallpaper && (
+          <div 
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-lg flex items-center justify-center p-4"
+            onClick={closeFullImage}
+          >
+            <button
+              onClick={closeFullImage}
+              className="absolute top-4 right-4 p-2 text-white hover:text-cyan-300 transition-colors z-50"
+              aria-label="Close full view"
+            >
+              <FiX className="text-2xl" />
+            </button>
+            
+            <div 
+              className="relative max-w-4xl w-full max-h-[90vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={selectedWallpaper.image_url}
+                alt={selectedWallpaper.title}
+                width={1920}
+                height={1080}
+                className="w-full h-auto max-h-[80vh] object-contain"
+                quality={100}
+              />
+              
+              <div className="mt-4 text-white">
+                <h2 className="text-2xl font-bold">{selectedWallpaper.title}</h2>
+                <p className="text-cyan-100">{selectedWallpaper.description}</p>
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {selectedWallpaper.tags.map(tag => (
+                    <span
+                      key={tag}
+                      className="text-xs px-2.5 py-1 rounded-full bg-indigo-900/40 text-cyan-100 border border-cyan-400/20"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="flex gap-3 mt-4">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDownload(selectedWallpaper.image_url, selectedWallpaper.title);
+                  }}
+                  className="px-4 py-2 bg-cyan-600 rounded-lg flex items-center gap-2 hover:bg-cyan-500 transition-colors"
+                >
+                  <FiDownload /> Download
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleSaveToGallery(selectedWallpaper.id, selectedWallpaper.image_url, selectedWallpaper.title);
+                  }}
+                  className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-colors ${
+                    savedImages.includes(selectedWallpaper.id)
+                      ? 'bg-purple-600'
+                      : 'bg-indigo-700 hover:bg-indigo-600'
+                  }`}
+                >
+                  {savedImages.includes(selectedWallpaper.id) ? (
+                    <>
+                      <FiStar className="fill-yellow-300 text-yellow-300" /> Saved
+                    </>
+                  ) : (
+                    <>
+                      <FiSave /> Save
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         <style jsx global>{`
           @keyframes twinkle {

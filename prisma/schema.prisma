@@ -1,7 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  // Avoid specifying the output path in node_modules
-  // Prisma will automatically handle the output location for the Prisma client
 }
 
 datasource db {
@@ -24,7 +22,8 @@ model Content {
   slug        String?   @unique
   type        String    @default("blog")
   likes       Int       @default(0)
-  comments    Comment[] // One-to-many relation with Comment
+  is_featured Boolean?  @default(false)
+  comments    Comment[]
 }
 
 model Comment {
@@ -34,10 +33,14 @@ model Comment {
   created_at  DateTime  @default(now())
   contentId   Int
   deleteToken String
+  parentId    Int?
   contentRef  Content   @relation(fields: [contentId], references: [id])
+  parent      Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies     Comment[] @relation("CommentReplies")
+}
 
-  // Self-referencing fields for replies
-  parentId    Int? 
-  parent      Comment?   @relation("CommentReplies", fields: [parentId], references: [id])
-  replies     Comment[]  @relation("CommentReplies")
+model playing_with_neon {
+  id    Int    @id @default(autoincrement())
+  name  String
+  value Float? @db.Real
 }

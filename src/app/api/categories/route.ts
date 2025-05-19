@@ -2,16 +2,9 @@
 
 import { NextResponse } from 'next/server';
 
-// Fake DB (You can move this to lib/db.ts if needed)
+// Filtered categories (removed: Programming, Web Development, Mobile Development, Data Science, Artificial Intelligence, Cloud Computing, Cybersecurity, Politics, Science, Sports, Education, Photography)
 const categories = [
   '💻 Technology',
-  '👨‍💻 Programming',
-  '🌐 Web Development',
-  '📱 Mobile Development',
-  '📊 Data Science',
-  '🤖 Artificial Intelligence',
-  '☁️ Cloud Computing',
-  '🛡️ Cybersecurity',
   '🏖️ Lifestyle',
   '🍳 Food and Cooking',
   '✈️ Travel',
@@ -22,12 +15,7 @@ const categories = [
   '📈 Marketing',
   '🎨 Design',
   '🎮 Gaming',
-  '📷 Photography',
   '🎬 Entertainment',
-  '🎓 Education',
-  '🔬 Science',
-  '🏛️ Politics',
-  '⚽ Sports',
   '❓ Other',
 ];
 

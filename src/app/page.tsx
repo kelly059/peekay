@@ -88,10 +88,6 @@ export default function LandingPage() {
     }
   ];
 
-  const handleContactClick = () => {
-    window.location.href = '/contact';
-  };
-
   const handleDonateClick = () => {
     window.open('http://buymeacoffee.com/conteny', '_blank');
   };
@@ -101,7 +97,7 @@ export default function LandingPage() {
   };
 
   const handleShareClick = async () => {
-    const url = window.location.href;
+    const url = 'https://lirivelle.com'; // Hardcoded canonical URL
     
     try {
       await navigator.share({
@@ -402,13 +398,6 @@ export default function LandingPage() {
               className="mt-16 flex flex-col sm:flex-row justify-center gap-4"
             >
               <button 
-                onClick={() => handleAuthClick('signup')}
-                className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300"
-                aria-label="Get started with lirivelle"
-              >
-                Get Started
-              </button>
-              <button 
                 onClick={handleDonateClick}
                 className="px-8 py-3 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
                 aria-label="Support our platform"
@@ -528,43 +517,6 @@ export default function LandingPage() {
             </motion.div>
           </div>
         </section>
-
-        {/* Contact Section */}
-        <section className="py-36 relative overflow-hidden" id="contact">
-          <div className="absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent animate-pulse"></div>
-          </div>
-          
-          <div className="max-w-4xl mx-auto px-6 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl md:text-5xl font-light mb-8 text-gray-900 dark:text-white">
-                Questions? <span className="font-medium">Contact us</span>
-              </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-400 mb-12">
-                We&apos;re here to help with any questions you might have.
-              </p>
-              
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-block"
-              >
-                <button 
-                  onClick={handleContactClick}
-                  className="px-8 py-4 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                  aria-label="Contact our team"
-                >
-                  Contact Page
-                </button>
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
       </main>
 
       <footer className="py-12 border-t border-gray-200 dark:border-gray-800 backdrop-blur-md">
@@ -582,7 +534,6 @@ export default function LandingPage() {
               <a href="/about" className="text-sm hover:underline" aria-label="About lirivelle">About</a>
               <a href="/privacy" className="text-sm hover:underline" aria-label="Privacy Policy">Privacy Policy</a>
               <a href="/terms" className="text-sm hover:underline" aria-label="Terms & Conditions">Terms & Conditions</a>
-              <a href="/contact" className="text-sm hover:underline" aria-label="Contact Us">Contact</a>
             </div>
             
             <div className="flex gap-4">
