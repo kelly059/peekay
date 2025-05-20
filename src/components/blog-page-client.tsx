@@ -242,7 +242,7 @@ export default function BlogPageClient({ initialBlogs = [], initialError = null 
                   className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full shadow-md hover:shadow-lg transition-all font-medium whitespace-nowrap"
                 >
                   <FiBookmark className="text-lg" />
-                  <span className="hidden sm:inline">Bookmarks</span>
+                  <span className="hidden sm:inline">cate</span>
                 </Link>
               </div>
             </div>
