@@ -1,3 +1,5 @@
+// app/blog/page.tsx or wherever your BlogPage is
+
 import BlogPageClient from "@/components/blog-page-client"
 
 export const dynamic = "force-dynamic"
@@ -9,16 +11,15 @@ export default async function BlogPage() {
 
 async function fetchBlogsOnServer() {
   try {
-    // For Server Components, we need to use absolute URLs
-    const baseUrl = process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}`
-      : process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-    
+    // ✅ Use your real domain in production
+    const baseUrl =
+      process.env.NEXT_PUBLIC_BASE_URL || "https://www.lirivelle.com"
+
     const response = await fetch(`${baseUrl}/api/blogs`, {
       cache: "no-store",
       headers: {
-        'Content-Type': 'application/json'
-      }
+        "Content-Type": "application/json",
+      },
     })
 
     if (!response.ok) {
