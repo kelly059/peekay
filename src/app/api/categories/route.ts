@@ -10,12 +10,10 @@ const categories = [
   '✈️ Travel',
   '🏋️‍♂️ Health and Fitness',
   '🧠 Personal Development',
-  '💰 Finance and Development',
+  '💰 Finance',
   '🏢 Business and Entrepreneurship',
   '📈 Marketing',
   '🎨 Design',
-  '🎮 Gaming',
-  '🎬 Entertainment',
   '❓ Other',
 ];
 

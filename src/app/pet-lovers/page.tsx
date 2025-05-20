@@ -19,6 +19,8 @@ export default function ContentListPage() {
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [touchStartY, setTouchStartY] = useState(0);
+  const [touchEndY, setTouchEndY] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   // SEO Metadata
@@ -112,6 +114,23 @@ export default function ContentListPage() {
     else handlePrev();
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartY(e.touches[0].clientY);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEndY(e.touches[0].clientY);
+  };
+
+  const handleTouchEnd = () => {
+    const threshold = 50;
+    if (touchStartY - touchEndY > threshold) {
+      handleNext();
+    } else if (touchEndY - touchStartY > threshold) {
+      handlePrev();
+    }
+  };
+
   const toggleMute = () => setIsMuted((prev) => !prev);
 
   const togglePlay = () => {
@@ -176,6 +195,9 @@ export default function ContentListPage() {
       <div
         className="relative h-screen w-full overflow-hidden bg-black"
         onWheel={handleWheel}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         {/* Search Bar on the Top-Left */}
         <div className="fixed top-6 left-6 w-[250px] z-50">

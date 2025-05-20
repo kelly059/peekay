@@ -55,8 +55,8 @@ export default function LandingPage() {
       link: '/confessions'
     },
     {
-      icon: '💋',
-      title: 'Whispers',
+      icon: '🧸',
+      title: 'Snapfacts',
       description: 'Mature conversations in a respectful environment',
       highlight: 'text-pink-400',
       gradient: 'from-pink-400 to-rose-400',
