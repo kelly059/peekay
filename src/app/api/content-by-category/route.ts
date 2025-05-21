@@ -1,20 +1,21 @@
-// app/api/content-by-category/route.ts
-
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db"; // your Prisma client
 
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
-    const category = searchParams.get("category");
+    const rawCategory = searchParams.get("category")?.trim().toLowerCase();
 
-    if (!category) {
+    if (!rawCategory) {
       return NextResponse.json({ error: "Category is required" }, { status: 400 });
     }
 
     const posts = await prisma.content.findMany({
       where: {
-        category: category,
+        category: {
+          contains: rawCategory,
+          mode: 'insensitive',
+        },
       },
       orderBy: {
         created_at: "desc",

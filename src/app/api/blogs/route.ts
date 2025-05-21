@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/db';
 
-export const revalidate = 3600; // Cache for 1 hour
+// ✅ Removed: export const revalidate = 3600;
 
 export async function GET() {
   try {
@@ -13,11 +13,10 @@ export async function GET() {
       select: {
         id: true,
         title: true,
-        description: true, // For preview text
+        description: true,
         image_url: true,
         created_at: true,
         is_featured: true,
-        // Removed: is_trending (it does not exist in your schema)
       },
     });
     console.timeEnd('Fetching blog posts');
@@ -25,7 +24,10 @@ export async function GET() {
   } catch (error) {
     console.error('❌ Failed to fetch blogs:', error);
     return NextResponse.json(
-      { error: 'Internal Server Error', message: error instanceof Error ? error.message : 'Unknown error' },
+      {
+        error: 'Internal Server Error',
+        message: error instanceof Error ? error.message : 'Unknown error',
+      },
       { status: 500 }
     );
   }

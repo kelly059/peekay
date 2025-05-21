@@ -56,7 +56,7 @@ type Blog = {
   category: string
   created_at: string
   is_featured?: boolean
-  is_trending?: boolean
+  is_trending?: boolean // Make this optional
 }
 
 type Star = {
