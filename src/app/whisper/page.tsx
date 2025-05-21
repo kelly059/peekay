@@ -92,7 +92,7 @@ export default function WhisperListPage() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-pulse flex flex-col items-center">
           <div className="h-12 w-12 bg-indigo-100 rounded-full mb-4"></div>
-          <p className="text-gray-500">Loading whispers...</p>
+          <p className="text-gray-500">Loading snapfacts...</p>
         </div>
       </div>
     </>
@@ -149,7 +149,7 @@ export default function WhisperListPage() {
               Snap facts
             </h1>
             <p className="mt-5 max-w-xl mx-auto text-xl text-gray-500">
-              Share your thoughts anonymously or discover what others are whispering...
+              🧸...
             </p>
           </motion.header>
 
