@@ -77,7 +77,7 @@ export default function ReadConfessionPage() {
             <div className="w-full h-full mx-auto rotate-180 opacity-30 blur-lg filter bg-gradient-to-r from-pink-400 to-purple-500"></div>
           </div>
           <h1 className="relative text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-600">
-            whispers
+            snap facts
           </h1>
         </div>
       </div>
@@ -91,7 +91,7 @@ export default function ReadConfessionPage() {
         {/* Decorative corner */}
         <div className="absolute top-0 right-0 w-24 h-24 overflow-hidden">
           <div className="absolute transform rotate-45 bg-pink-100 text-pink-500 py-1 text-xs font-semibold text-center w-40 top-11 -right-16">
-            WHISPERS #{id}
+            SNAPFACTS #{id}
           </div>
         </div>
 
@@ -113,7 +113,7 @@ export default function ReadConfessionPage() {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              Confessed on {new Date(confession.created_at).toLocaleString('en-US', {
+              date {new Date(confession.created_at).toLocaleString('en-US', {
                 month: 'short',
                 day: 'numeric',
                 year: 'numeric',
@@ -132,7 +132,7 @@ export default function ReadConfessionPage() {
 
       {/* Footer decoration */}
       <div className="mt-12 text-center text-gray-400 text-sm">
-        <p>This confession will self-destruct in 24 hours... just kidding</p>
+        <p>snap facts</p>
       </div>
     </div>
   );
