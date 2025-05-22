@@ -14,12 +14,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// ✅ Metadata with custom icon
+// ✅ Metadata with domain verification meta tag and custom icon
 export const metadata: Metadata = {
   title: "Lirivelle - Sweet Digital Space",
   description: "Your digital sanctuary for whispers, blogs, heart talks, and more.",
   icons: {
-    icon: "/kelly.svg", // This points to public/kelly.svg
+    icon: "/kelly.svg",
+  },
+  other: {
+    "fd166196214ba457d7cf19a285392a5ad11795b0": "fd166196214ba457d7cf19a285392a5ad11795b0",
   },
 };
 
