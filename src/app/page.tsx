@@ -150,11 +150,14 @@ export default function LandingPage() {
   return (
     <div className={`min-h-screen transition-colors duration-500 ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
       <Head>
+        {/* Verification Meta Tag */}
+        <meta name="3402685d3dd5a408f5fac7a3fb70ea8b16ff34cd" content="3402685d3dd5a408f5fac7a3fb70ea8b16ff34cd" />
+        
         {/* Primary Meta Tags */}
         <title>lirivelle | 🖼 Wallpapers 🕵 Confessions 💋 Whispers 📝 Blogs</title>
         <meta 
           name="description" 
-          content="🎧 Relaxing Sounds ❤ Heart Talk 🐾 Pet Lovers - Your sanctuary for confessions, HD wallpapers, mental wellness, and emotional support. Join lirivelle today!" 
+          content="🎧 Relaxing Sounds ❤ Heart Talk � Pet Lovers - Your sanctuary for confessions, HD wallpapers, mental wellness, and emotional support. Join lirivelle today!" 
         />
         <meta name="keywords" content="🖼 Wallpapers, 🕵 Confessions, 💋 Whispers, 📝 Blogs, 🎧 Relaxing Sounds, ❤ Heart Talk, 🐾 Pet Lovers, anonymous confessions, HD wallpapers, poetic whispers, self-care, mental wellness, emotional support, stress relief" />
         <meta name="author" content="lirivelle" />
@@ -171,7 +174,7 @@ export default function LandingPage() {
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="lirivelle | Content Sanctuary" />
-        <meta name="twitter:description" content="🖼 Wallpapers 🕵 Confessions 💋 Whispers 📝 Blogs 🎧 Sounds ❤ Heart Talk - Join our community" />
+        <meta name="twitter:description" content="🖼 Wallpapers 🕵 Confessions 💋 Whispers 📝 Blogs � Sounds ❤ Heart Talk - Join our community" />
         <meta name="twitter:image" content="https://lirivelle.com/public/images/website_imagepreview.jpg" />
         <meta name="twitter:creator" content="@lirivelle" />
         
