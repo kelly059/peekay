@@ -151,7 +151,7 @@ export default function LandingPage() {
     <div className={`min-h-screen transition-colors duration-500 ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
       <Head>
         {/* Verification Meta Tag */}
-        <meta name="3402685d3dd5a408f5fac7a3fb70ea8b16ff34cd" content="3402685d3dd5a408f5fac7a3fb70ea8b16ff34cd" />
+        <meta name="fd166196214ba457d7cf19a285392a5ad11795b0" content="fd166196214ba457d7cf19a285392a5ad11795b0" />
         
         {/* Primary Meta Tags */}
         <title>lirivelle | 🖼 Wallpapers 🕵 Confessions 💋 Whispers 📝 Blogs</title>
