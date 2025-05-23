@@ -1,32 +1,35 @@
-'use client';
+"use client"
 
-import { useEffect, useState } from 'react';
-import { FiDownload, FiSave, FiSearch, FiStar, FiX } from 'react-icons/fi';
-import { FaGalacticRepublic } from 'react-icons/fa';
-import Image from 'next/image';
-import Head from 'next/head';
+import type React from "react"
+
+import { useEffect, useState } from "react"
+import { FiDownload, FiSave, FiSearch, FiStar, FiX } from "react-icons/fi"
+import { FaGalacticRepublic } from "react-icons/fa"
+import Image from "next/image"
+import Head from "next/head"
 
 type Wallpaper = {
-  id: string;
-  title: string;
-  description: string;
-  image_url: string;
-  tags: string[];
-};
+  id: string
+  title: string
+  description: string
+  image_url: string
+  tags: string[]
+}
 
 export default function ExplorePage() {
-  const [wallpapers, setWallpapers] = useState<Wallpaper[]>([]);
-  const [filteredWallpapers, setFilteredWallpapers] = useState<Wallpaper[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [savedImages, setSavedImages] = useState<string[]>([]);
-  const [selectedWallpaper, setSelectedWallpaper] = useState<Wallpaper | null>(null);
+  const [wallpapers, setWallpapers] = useState<Wallpaper[]>([])
+  const [filteredWallpapers, setFilteredWallpapers] = useState<Wallpaper[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [searchQuery, setSearchQuery] = useState("")
+  const [savedImages, setSavedImages] = useState<string[]>([])
+  const [selectedWallpaper, setSelectedWallpaper] = useState<Wallpaper | null>(null)
 
   // SEO Metadata
-  const pageTitle = "Nebula Visuals | HD Cosmic Wallpapers & Aesthetic Backgrounds";
-  const pageDescription = "Discover stunning HD wallpapers including cosmic themes, nature backgrounds, cute wallpapers, and dark mode wallpapers. Perfect for phones and desktop. Free downloads available.";
-  const siteUrl = "https://lirivelle.com";
+  const pageTitle = "Nebula Visuals | HD Cosmic Wallpapers & Aesthetic Backgrounds"
+  const pageDescription =
+    "Discover stunning HD wallpapers including cosmic themes, nature backgrounds, cute wallpapers, and dark mode wallpapers. Perfect for phones and desktop. Free downloads available."
+  const siteUrl = "https://lirivelle.com"
   const keywords = [
     "HD wallpapers",
     "aesthetic backgrounds",
@@ -42,107 +45,132 @@ export default function ExplorePage() {
     "4K backgrounds",
     "galaxy wallpapers",
     "space wallpapers",
-    "nebula visuals"
-  ].join(', ');
+    "nebula visuals",
+  ].join(", ")
 
   useEffect(() => {
     const fetchWallpapers = async () => {
       try {
-        const res = await fetch('/api/wallpapers');
-        const data = await res.json();
+        const res = await fetch("/api/wallpapers")
+        const data = await res.json()
 
         if (data.success) {
-          setWallpapers(data.wallpapers);
-          setFilteredWallpapers(data.wallpapers);
+          setWallpapers(data.wallpapers)
+          setFilteredWallpapers(data.wallpapers)
         } else {
-          setError('Failed to load cosmic wonders.');
+          setError("Failed to load cosmic wonders.")
         }
       } catch (error) {
-        setError('Connection to the cosmos failed.');
-        console.error('Stellar fetch error:', error);
+        setError("Connection to the cosmos failed.")
+        console.error("Stellar fetch error:", error)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
-
-    fetchWallpapers();
-
-    const saved = localStorage.getItem('savedWallpapers');
-    if (saved) {
-      setSavedImages(JSON.parse(saved));
     }
-  }, []);
+
+    fetchWallpapers()
+
+    const saved = localStorage.getItem("savedWallpapers")
+    if (saved) {
+      setSavedImages(JSON.parse(saved))
+    }
+  }, [])
 
   const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     if (!searchQuery.trim()) {
-      setFilteredWallpapers(wallpapers);
-      return;
+      setFilteredWallpapers(wallpapers)
+      return
     }
 
-    setLoading(true);
+    setLoading(true)
     try {
-      const res = await fetch(`/api/search?query=${encodeURIComponent(searchQuery)}&type=wallpaper`);
-      const data = await res.json();
+      const res = await fetch(`/api/search?query=${encodeURIComponent(searchQuery)}&type=wallpaper`)
+      const data = await res.json()
 
       if (data.success) {
-        setFilteredWallpapers(data.results);
+        setFilteredWallpapers(data.results)
       } else {
-        setError('Cosmic search failed. Try another constellation.');
-        setFilteredWallpapers(wallpapers);
+        setError("Cosmic search failed. Try another constellation.")
+        setFilteredWallpapers(wallpapers)
       }
     } catch (error) {
-      setError('Interstellar connection error.');
-      console.error('Search error:', error);
-      setFilteredWallpapers(wallpapers);
+      setError("Interstellar connection error.")
+      console.error("Search error:", error)
+      setFilteredWallpapers(wallpapers)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   const handleDownload = async (imageUrl: string, title: string) => {
     try {
-      const response = await fetch(imageUrl, { mode: 'cors' });
-      if (!response.ok) throw new Error('Transmission failed');
+      // Create a hidden iframe to handle the download
+      // This approach helps trigger the browser's download UI more reliably
+      const iframe = document.createElement("iframe")
+      iframe.style.display = "none"
+      document.body.appendChild(iframe)
 
-      const blob = await response.blob();
-      const blobUrl = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = blobUrl;
-      link.download = `${title || 'cosmic-wonder'}.jpg`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(blobUrl);
+      // Fetch the image
+      const response = await fetch(imageUrl, { mode: "cors" })
+      if (!response.ok) throw new Error("Transmission failed")
+
+      const blob = await response.blob()
+      const blobUrl = window.URL.createObjectURL(blob)
+
+      // Use the iframe to trigger download
+      const iframeDoc = iframe.contentWindow?.document
+      if (iframeDoc) {
+        const link = iframeDoc.createElement("a")
+        link.href = blobUrl
+        link.download = `${title || "cosmic-wonder"}.jpg`
+        link.click()
+
+        // Clean up after a short delay
+        setTimeout(() => {
+          window.URL.revokeObjectURL(blobUrl)
+          document.body.removeChild(iframe)
+        }, 1000)
+      } else {
+        // Fallback to the original method if iframe approach fails
+        const link = document.createElement("a")
+        link.href = blobUrl
+        link.download = `${title || "cosmic-wonder"}.jpg`
+        link.target = "_blank"
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        window.URL.revokeObjectURL(blobUrl)
+      }
     } catch (error) {
-      console.error('Download error:', error);
-      alert('Warp drive malfunction! Try again.');
+      console.error("Download error:", error)
+      alert("Warp drive malfunction! Try again.")
     }
-  };
+  }
 
   const handleSaveToGallery = async (id: string, imageUrl: string, title: string) => {
     try {
       if (!savedImages.includes(id)) {
-        await handleDownload(imageUrl, title);
+        await handleDownload(imageUrl, title)
 
-        const updatedSaved = [...savedImages, id];
-        setSavedImages(updatedSaved);
-        localStorage.setItem('savedWallpapers', JSON.stringify(updatedSaved));
+        const updatedSaved = [...savedImages, id]
+        setSavedImages(updatedSaved)
+        localStorage.setItem("savedWallpapers", JSON.stringify(updatedSaved))
       }
     } catch (error) {
-      console.error('Save error:', error);
+      console.error("Save error:", error)
     }
-  };
+  }
 
   const openFullImage = (wallpaper: Wallpaper) => {
-    setSelectedWallpaper(wallpaper);
-    document.body.style.overflow = 'hidden';
-  };
+    setSelectedWallpaper(wallpaper)
+    document.body.style.overflow = "hidden"
+  }
 
   const closeFullImage = () => {
-    setSelectedWallpaper(null);
-    document.body.style.overflow = 'auto';
-  };
+    setSelectedWallpaper(null)
+    document.body.style.overflow = "auto"
+  }
 
   if (loading) {
     return (
@@ -161,12 +189,10 @@ export default function ExplorePage() {
             <div className="absolute inset-0 bg-cyan-400 rounded-full blur-xl opacity-70 animate-pulse"></div>
             <div className="relative w-24 h-24 border-4 border-transparent border-t-cyan-300 border-r-cyan-300 rounded-full animate-spin"></div>
           </div>
-          <p className="mt-8 text-xl text-cyan-100 font-light tracking-widest animate-pulse">
-            CONNECTING TO COSMOS...
-          </p>
+          <p className="mt-8 text-xl text-cyan-100 font-light tracking-widest animate-pulse">CONNECTING TO COSMOS...</p>
         </div>
       </>
-    );
+    )
   }
 
   if (error) {
@@ -188,7 +214,7 @@ export default function ExplorePage() {
           </button>
         </div>
       </>
-    );
+    )
   }
 
   return (
@@ -220,7 +246,7 @@ export default function ExplorePage() {
                 left: `${Math.random() * 100}%`,
                 width: `${Math.random() * 3 + 1}px`,
                 height: `${Math.random() * 3 + 1}px`,
-                animation: `twinkle ${Math.random() * 5 + 3}s infinite alternate`
+                animation: `twinkle ${Math.random() * 5 + 3}s infinite alternate`,
               }}
             ></div>
           ))}
@@ -268,7 +294,7 @@ export default function ExplorePage() {
               >
                 <div className="relative overflow-hidden aspect-auto">
                   <Image
-                    src={wallpaper.image_url}
+                    src={wallpaper.image_url || "/placeholder.svg"}
                     alt={wallpaper.title}
                     width={600}
                     height={900}
@@ -278,10 +304,14 @@ export default function ExplorePage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
                     <div>
-                      <h2 className="text-xl font-medium text-white mb-1" itemProp="name">{wallpaper.title}</h2>
-                      <p className="text-sm text-cyan-100 font-light mb-3" itemProp="description">{wallpaper.description}</p>
+                      <h2 className="text-xl font-medium text-white mb-1" itemProp="name">
+                        {wallpaper.title}
+                      </h2>
+                      <p className="text-sm text-cyan-100 font-light mb-3" itemProp="description">
+                        {wallpaper.description}
+                      </p>
                       <div className="flex flex-wrap gap-2 mb-3">
-                        {wallpaper.tags.slice(0, 3).map(tag => (
+                        {wallpaper.tags.slice(0, 3).map((tag) => (
                           <span
                             key={tag}
                             className="text-xs px-2.5 py-1 rounded-full bg-indigo-900/40 text-cyan-100 border border-cyan-400/20"
@@ -298,8 +328,8 @@ export default function ExplorePage() {
                 <div className="absolute top-3 right-3 flex gap-2 opacity-100 sm:opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <button
                     onClick={(e) => {
-                      e.stopPropagation();
-                      handleDownload(wallpaper.image_url, wallpaper.title);
+                      e.stopPropagation()
+                      handleDownload(wallpaper.image_url, wallpaper.title)
                     }}
                     className="p-2.5 bg-indigo-900/70 rounded-full hover:bg-cyan-500 transition-colors duration-200 text-white"
                     title="Download"
@@ -309,19 +339,23 @@ export default function ExplorePage() {
                   </button>
                   <button
                     onClick={(e) => {
-                      e.stopPropagation();
-                      handleSaveToGallery(wallpaper.id, wallpaper.image_url, wallpaper.title);
+                      e.stopPropagation()
+                      handleSaveToGallery(wallpaper.id, wallpaper.image_url, wallpaper.title)
                     }}
                     disabled={savedImages.includes(wallpaper.id)}
                     className={`p-2.5 rounded-full transition-colors duration-200 ${
                       savedImages.includes(wallpaper.id)
-                        ? 'bg-purple-500/70 text-white cursor-default'
-                        : 'bg-indigo-900/70 hover:bg-purple-500 text-white'
+                        ? "bg-purple-500/70 text-white cursor-default"
+                        : "bg-indigo-900/70 hover:bg-purple-500 text-white"
                     }`}
                     title={savedImages.includes(wallpaper.id) ? "Saved" : "Save"}
                     aria-label={savedImages.includes(wallpaper.id) ? "Wallpaper saved" : "Save wallpaper"}
                   >
-                    {savedImages.includes(wallpaper.id) ? <FiStar className="fill-yellow-300 text-yellow-300" /> : <FiSave />}
+                    {savedImages.includes(wallpaper.id) ? (
+                      <FiStar className="fill-yellow-300 text-yellow-300" />
+                    ) : (
+                      <FiSave />
+                    )}
                   </button>
                 </div>
               </div>
@@ -339,7 +373,7 @@ export default function ExplorePage() {
 
         {/* Full Image View Modal */}
         {selectedWallpaper && (
-          <div 
+          <div
             className="fixed inset-0 z-50 bg-black/90 backdrop-blur-lg flex items-center justify-center p-4"
             onClick={closeFullImage}
           >
@@ -350,25 +384,22 @@ export default function ExplorePage() {
             >
               <FiX className="text-2xl" />
             </button>
-            
-            <div 
-              className="relative max-w-4xl w-full max-h-[90vh]"
-              onClick={(e) => e.stopPropagation()}
-            >
+
+            <div className="relative max-w-4xl w-full max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
               <Image
-                src={selectedWallpaper.image_url}
+                src={selectedWallpaper.image_url || "/placeholder.svg"}
                 alt={selectedWallpaper.title}
                 width={1920}
                 height={1080}
                 className="w-full h-auto max-h-[80vh] object-contain"
                 quality={100}
               />
-              
+
               <div className="mt-4 text-white">
                 <h2 className="text-2xl font-bold">{selectedWallpaper.title}</h2>
                 <p className="text-cyan-100">{selectedWallpaper.description}</p>
                 <div className="flex flex-wrap gap-2 mt-3">
-                  {selectedWallpaper.tags.map(tag => (
+                  {selectedWallpaper.tags.map((tag) => (
                     <span
                       key={tag}
                       className="text-xs px-2.5 py-1 rounded-full bg-indigo-900/40 text-cyan-100 border border-cyan-400/20"
@@ -378,12 +409,12 @@ export default function ExplorePage() {
                   ))}
                 </div>
               </div>
-              
+
               <div className="flex gap-3 mt-4">
                 <button
                   onClick={(e) => {
-                    e.stopPropagation();
-                    handleDownload(selectedWallpaper.image_url, selectedWallpaper.title);
+                    e.stopPropagation()
+                    handleDownload(selectedWallpaper.image_url, selectedWallpaper.title)
                   }}
                   className="px-4 py-2 bg-cyan-600 rounded-lg flex items-center gap-2 hover:bg-cyan-500 transition-colors"
                 >
@@ -391,13 +422,11 @@ export default function ExplorePage() {
                 </button>
                 <button
                   onClick={(e) => {
-                    e.stopPropagation();
-                    handleSaveToGallery(selectedWallpaper.id, selectedWallpaper.image_url, selectedWallpaper.title);
+                    e.stopPropagation()
+                    handleSaveToGallery(selectedWallpaper.id, selectedWallpaper.image_url, selectedWallpaper.title)
                   }}
                   className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-colors ${
-                    savedImages.includes(selectedWallpaper.id)
-                      ? 'bg-purple-600'
-                      : 'bg-indigo-700 hover:bg-indigo-600'
+                    savedImages.includes(selectedWallpaper.id) ? "bg-purple-600" : "bg-indigo-700 hover:bg-indigo-600"
                   }`}
                 >
                   {savedImages.includes(selectedWallpaper.id) ? (
@@ -431,5 +460,5 @@ export default function ExplorePage() {
         `}</style>
       </div>
     </>
-  );
+  )
 }
