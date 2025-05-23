@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// ✅ Updated metadata with Monetag verification and custom icon
+// ✅ Updated metadata with AdSense verification and custom icon
 export const metadata: Metadata = {
   title: "Lirivelle - Sweet Digital Space",
   description: "Your digital sanctuary for whispers, blogs, heart talks, and more.",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     icon: "/kelly.svg",
   },
   other: {
-    monetag: "718da6ad65c1b5e12043078ab7f30f67",
+    "google-adsense-account": "ca-pub-7005615551005731",
   },
 };
 
@@ -33,6 +33,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="google-adsense-account" content="ca-pub-7005615551005731" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
         <Analytics />
