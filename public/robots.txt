@@ -1,5 +1,7 @@
+# Allow full access to Google AdSense
 User-agent: Mediapartners-Google
 Disallow:
 
+# Disallow crawlers from accessing URLs with query parameters
 User-agent: *
-Disallow:
+Disallow: /*?
