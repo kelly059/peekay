@@ -131,7 +131,7 @@ export default function BlogPageClient({ initialBlogs = [], initialError = null 
   const pageTitle = "The Modern Gazette | Tech Blog & Programming Resources"
   const pageDescription =
     "Explore the latest in technology, programming tutorials, and web development trends. A modern blog for developers and tech enthusiasts."
-  const siteUrl = "https://lirivelle.com"
+  const siteUrl = "https://lirivelle.com/blogs"
 
   useEffect(() => {
     setIsClient(true)

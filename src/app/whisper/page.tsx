@@ -25,7 +25,7 @@ export default function WhisperListPage() {
   // SEO Metadata
   const pageTitle = "Secret Whispers | Anonymous Confessions & Private Thoughts";
   const pageDescription = "Share your thoughts anonymously or discover what others are whispering. A safe space for secret confessions, midnight thoughts, and emotional whispers.";
-  const siteUrl = "https://lirivelle.com";
+  const siteUrl = "https://lirivelle.com/snapfacts";
   const keywords = [
     "secret whispers",
     "anonymous whispers",

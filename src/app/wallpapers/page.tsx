@@ -29,7 +29,7 @@ export default function ExplorePage() {
   const pageTitle = "Nebula Visuals | HD Cosmic Wallpapers & Aesthetic Backgrounds"
   const pageDescription =
     "Discover stunning HD wallpapers including cosmic themes, nature backgrounds, cute wallpapers, and dark mode wallpapers. Perfect for phones and desktop. Free downloads available."
-  const siteUrl = "https://lirivelle.com"
+  const siteUrl = "https://lirivelle.com/wallpapers"
   const keywords = [
     "HD wallpapers",
     "aesthetic backgrounds",
