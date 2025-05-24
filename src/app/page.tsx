@@ -223,13 +223,13 @@ export default function LandingPage() {
                 className="text-xl font-light hover:scale-105 transition-transform"
                 aria-label="lirivelle Home"
               >
-                <span className="font-medium italic text-indigo-600 dark:text-indigo-400">lirivelle</span> love
+                <span className="font-medium italic text-purple-600 dark:text-purple-400">lirivelle</span> <span className="text-purple-600 dark:text-purple-400">love</span>
               </motion.a>
               <div className="flex items-center space-x-4">
                 <div className="hidden md:flex items-center space-x-4 mr-4">
-                  <a href="/about" className="text-sm hover:underline text-gray-700 dark:text-gray-300">About</a>
-                  <a href="/privacy" className="text-sm hover:underline text-gray-700 dark:text-gray-300">Privacy</a>
-                  <a href="/terms" className="text-sm hover:underline text-gray-700 dark:text-gray-300">Terms</a>
+                  <a href="/about" className="text-sm hover:underline text-purple-600 dark:text-purple-400">About</a>
+                  <a href="/privacy" className="text-sm hover:underline text-purple-600 dark:text-purple-400">Privacy</a>
+                  <a href="/terms" className="text-sm hover:underline text-purple-600 dark:text-purple-400">Terms</a>
                 </div>
                 <button 
                   onClick={handleDonateClick}
@@ -280,13 +280,13 @@ export default function LandingPage() {
                 className="text-xl font-light hover:scale-105 transition-transform"
                 aria-label="lirivelle Home"
               >
-                <span className="font-medium italic text-indigo-600 dark:text-indigo-400">lirivelle</span> love
+                <span className="font-medium italic text-purple-600 dark:text-purple-400">lirivelle</span> <span className="text-purple-600 dark:text-purple-400">love</span>
               </a>
               <div className="flex items-center space-x-4">
                 <div className="hidden md:flex items-center space-x-4 mr-4">
-                  <a href="/about" className="text-sm hover:underline text-gray-700 dark:text-gray-300">About</a>
-                  <a href="/privacy" className="text-sm hover:underline text-gray-700 dark:text-gray-300">Privacy</a>
-                  <a href="/terms" className="text-sm hover:underline text-gray-700 dark:text-gray-300">Terms</a>
+                  <a href="/about" className="text-sm hover:underline text-purple-600 dark:text-purple-400">About</a>
+                  <a href="/privacy" className="text-sm hover:underline text-purple-600 dark:text-purple-400">Privacy</a>
+                  <a href="/terms" className="text-sm hover:underline text-purple-600 dark:text-purple-400">Terms</a>
                 </div>
                 <button 
                   onClick={handleDonateClick}
@@ -346,14 +346,14 @@ export default function LandingPage() {
             >
               <span className="font-medium italic bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
                 lirivelle
-              </span> sweet
+              </span> <span className="text-purple-600 dark:text-purple-400">sweet</span>
             </motion.h1>
             
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-16"
+              className="text-xl md:text-2xl text-purple-600 dark:text-purple-400 max-w-3xl mx-auto mb-16"
             >
               Your digital sanctuary for 🖼 Wallpapers, 🕵 Confessions, 💋 Whispers, and ❤ Heart Talk
             </motion.p>
@@ -440,9 +440,9 @@ export default function LandingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="text-3xl md:text-5xl font-light mb-20 text-center text-gray-900 dark:text-white"
+              className="text-3xl md:text-5xl font-light mb-20 text-center text-purple-600 dark:text-purple-400"
             >
-              Carefully curated <span className="font-medium text-indigo-600 dark:text-indigo-400">experiences</span>
+              Carefully curated <span className="font-medium text-purple-700 dark:text-purple-300">experiences</span>
             </motion.h2>
             
             <div className="space-y-24">
@@ -497,7 +497,7 @@ export default function LandingPage() {
               viewport={{ once: true }}
             >
               <h2 className="text-4xl md:text-5xl font-light mb-6 text-gray-900 dark:text-white">
-                Love what we do? <span className="font-medium text-indigo-600 dark:text-indigo-400">Support us!</span>
+                Love what we do? <span className="font-medium text-purple-600 dark:text-purple-400">Support us!</span>
               </h2>
               <p className="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
                 Your donations help keep lirivelle free and accessible for everyone.
@@ -530,13 +530,13 @@ export default function LandingPage() {
               className="text-xl font-light mb-6 md:mb-0 hover:scale-105 transition-transform"
               aria-label="lirivelle Home"
             >
-              <span className="font-medium italic text-indigo-600 dark:text-indigo-400">lirivelle</span> love
+              <span className="font-medium italic text-purple-600 dark:text-purple-400">lirivelle</span> <span className="text-purple-600 dark:text-purple-400">love</span>
             </a>
             
             <div className="flex flex-wrap justify-center gap-4 mb-6 md:mb-0">
-              <a href="/about" className="text-sm hover:underline text-gray-700 dark:text-gray-300">About</a>
-              <a href="/privacy" className="text-sm hover:underline text-gray-700 dark:text-gray-300">Privacy Policy</a>
-              <a href="/terms" className="text-sm hover:underline text-gray-700 dark:text-gray-300">Terms & Conditions</a>
+              <a href="/about" className="text-sm hover:underline text-purple-600 dark:text-purple-400">About</a>
+              <a href="/privacy" className="text-sm hover:underline text-purple-600 dark:text-purple-400">Privacy Policy</a>
+              <a href="/terms" className="text-sm hover:underline text-purple-600 dark:text-purple-400">Terms & Conditions</a>
             </div>
             
             <div className="flex gap-4">
