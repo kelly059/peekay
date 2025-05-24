@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     icon: "/kelly.svg",
   },
   other: {
-    "google-adsense-account": "ca-pub-7005615551005731",
+    "google-adsense-account": "ca-pub-8702688541452393",
   },
 };
 
@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="google-adsense-account" content="ca-pub-7005615551005731" />
+        <meta name="google-adsense-account" content="ca-pub-8702688541452393" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
