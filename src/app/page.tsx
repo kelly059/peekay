@@ -223,24 +223,24 @@ export default function LandingPage() {
                 className="text-xl font-light hover:scale-105 transition-transform"
                 aria-label="lirivelle Home"
               >
-                <span className="font-medium italic">lirivelle</span> love
+                <span className="font-medium italic text-indigo-600 dark:text-indigo-400">lirivelle</span> love
               </motion.a>
               <div className="flex items-center space-x-4">
                 <div className="hidden md:flex items-center space-x-4 mr-4">
-                  <a href="/about" className="text-sm hover:underline" aria-label="About lirivelle">About</a>
-                  <a href="/privacy" className="text-sm hover:underline" aria-label="Privacy Policy">Privacy</a>
-                  <a href="/terms" className="text-sm hover:underline" aria-label="Terms & Conditions">Terms</a>
+                  <a href="/about" className="text-sm hover:underline text-gray-700 dark:text-gray-300">About</a>
+                  <a href="/privacy" className="text-sm hover:underline text-gray-700 dark:text-gray-300">Privacy</a>
+                  <a href="/terms" className="text-sm hover:underline text-gray-700 dark:text-gray-300">Terms</a>
                 </div>
                 <button 
                   onClick={handleDonateClick}
-                  className="px-4 py-2 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white text-sm hover:shadow-lg transition-all"
+                  className="px-4 py-2 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm hover:shadow-lg transition-all"
                   aria-label="Donate to support us"
                 >
                   Donate
                 </button>
                 <button 
                   onClick={handleShareClick}
-                  className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-sm hover:shadow-lg transition-all relative"
+                  className="px-4 py-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-sm hover:shadow-lg transition-all relative"
                   aria-label="Share this page"
                 >
                   Share
@@ -280,24 +280,24 @@ export default function LandingPage() {
                 className="text-xl font-light hover:scale-105 transition-transform"
                 aria-label="lirivelle Home"
               >
-                <span className="font-medium italic">lirivelle</span> pl
+                <span className="font-medium italic text-indigo-600 dark:text-indigo-400">lirivelle</span> love
               </a>
               <div className="flex items-center space-x-4">
                 <div className="hidden md:flex items-center space-x-4 mr-4">
-                  <a href="/about" className="text-sm hover:underline" aria-label="About lirivelle">About</a>
-                  <a href="/privacy" className="text-sm hover:underline" aria-label="Privacy Policy">Privacy</a>
-                  <a href="/terms" className="text-sm hover:underline" aria-label="Terms & Conditions">Terms</a>
+                  <a href="/about" className="text-sm hover:underline text-gray-700 dark:text-gray-300">About</a>
+                  <a href="/privacy" className="text-sm hover:underline text-gray-700 dark:text-gray-300">Privacy</a>
+                  <a href="/terms" className="text-sm hover:underline text-gray-700 dark:text-gray-300">Terms</a>
                 </div>
                 <button 
                   onClick={handleDonateClick}
-                  className="px-4 py-2 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white text-sm hover:shadow-lg transition-all"
+                  className="px-4 py-2 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm hover:shadow-lg transition-all"
                   aria-label="Donate to support us"
                 >
                   Donate
                 </button>
                 <button 
                   onClick={handleShareClick}
-                  className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-sm hover:shadow-lg transition-all relative"
+                  className="px-4 py-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-sm hover:shadow-lg transition-all relative"
                   aria-label="Share this page"
                 >
                   Share
@@ -344,7 +344,7 @@ export default function LandingPage() {
               transition={{ duration: 0.8 }}
               className="text-5xl md:text-7xl lg:text-8xl font-light mb-8 text-gray-900 dark:text-white"
             >
-              <span className="font-medium italic bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
+              <span className="font-medium italic bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
                 lirivelle
               </span> sweet
             </motion.h1>
@@ -402,14 +402,14 @@ export default function LandingPage() {
             >
               <button 
                 onClick={handleDonateClick}
-                className="px-8 py-3 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+                className="px-8 py-3 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
                 aria-label="Support our platform"
               >
                 <span aria-hidden="true">💛</span> Support Us
               </button>
               <button 
                 onClick={handleShareClick}
-                className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 relative"
+                className="px-8 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 relative"
                 aria-label="Share lirivelle"
               >
                 Share
@@ -442,7 +442,7 @@ export default function LandingPage() {
               viewport={{ once: true }}
               className="text-3xl md:text-5xl font-light mb-20 text-center text-gray-900 dark:text-white"
             >
-              Carefully curated <span className="font-medium">experiences</span>
+              Carefully curated <span className="font-medium text-indigo-600 dark:text-indigo-400">experiences</span>
             </motion.h2>
             
             <div className="space-y-24">
@@ -497,7 +497,7 @@ export default function LandingPage() {
               viewport={{ once: true }}
             >
               <h2 className="text-4xl md:text-5xl font-light mb-6 text-gray-900 dark:text-white">
-                Love what we do? <span className="font-medium">Support us!</span>
+                Love what we do? <span className="font-medium text-indigo-600 dark:text-indigo-400">Support us!</span>
               </h2>
               <p className="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
                 Your donations help keep lirivelle free and accessible for everyone.
@@ -510,7 +510,7 @@ export default function LandingPage() {
                 >
                   <button 
                     onClick={handleDonateClick}
-                    className="px-8 py-4 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 mx-auto"
+                    className="px-8 py-4 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 mx-auto"
                     aria-label="Donate to support our platform"
                   >
                     <span aria-hidden="true">💛</span> Donate Now
@@ -530,26 +530,26 @@ export default function LandingPage() {
               className="text-xl font-light mb-6 md:mb-0 hover:scale-105 transition-transform"
               aria-label="lirivelle Home"
             >
-              <span className="font-medium italic">lirivelle</span> love
+              <span className="font-medium italic text-indigo-600 dark:text-indigo-400">lirivelle</span> love
             </a>
             
             <div className="flex flex-wrap justify-center gap-4 mb-6 md:mb-0">
-              <a href="/about" className="text-sm hover:underline" aria-label="About lirivelle">About</a>
-              <a href="/privacy" className="text-sm hover:underline" aria-label="Privacy Policy">Privacy Policy</a>
-              <a href="/terms" className="text-sm hover:underline" aria-label="Terms & Conditions">Terms & Conditions</a>
+              <a href="/about" className="text-sm hover:underline text-gray-700 dark:text-gray-300">About</a>
+              <a href="/privacy" className="text-sm hover:underline text-gray-700 dark:text-gray-300">Privacy Policy</a>
+              <a href="/terms" className="text-sm hover:underline text-gray-700 dark:text-gray-300">Terms & Conditions</a>
             </div>
             
             <div className="flex gap-4">
               <button 
                 onClick={handleDonateClick}
-                className="px-6 py-2 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white hover:shadow-lg transition-all"
+                className="px-6 py-2 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white hover:shadow-lg transition-all"
                 aria-label="Donate to support us"
               >
                 Donate
               </button>
               <button 
                 onClick={handleShareClick}
-                className="px-6 py-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white hover:shadow-lg transition-all relative"
+                className="px-6 py-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:shadow-lg transition-all relative"
                 aria-label="Share this page"
               >
                 Share
