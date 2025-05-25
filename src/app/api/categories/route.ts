@@ -13,7 +13,6 @@ const categories = [
   '💰 Finance',
   '🏢 Business and Entrepreneurship',
   '📈 Marketing',
-  '🎨 Design',
   '❓ Other',
 ];
 

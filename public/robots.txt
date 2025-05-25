@@ -2,6 +2,8 @@
 User-agent: Mediapartners-Google
 Disallow:
 
-# Disallow crawlers from accessing URLs with query parameters
+# Allow all Google crawlers
 User-agent: *
-Disallow: /*?
+Allow: /
+
+Sitemap: https://lirivelle.com/sitemap.xml

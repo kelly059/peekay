@@ -198,13 +198,6 @@ export default function UploadPage() {
               >
                 <option value="">Select a category</option>
                 <option value="technology">Technology</option>
-                <option value="programming">Programming</option>
-                <option value="web-development">Web Development</option>
-                <option value="mobile-development">Mobile Development</option>
-                <option value="data-science">Data Science</option>
-                <option value="artificial-intelligence">Artificial Intelligence</option>
-                <option value="cybersecurity">Cybersecurity</option>
-                <option value="cloud-computing">Cloud Computing</option>
                 <option value="lifestyle">Lifestyle</option>
                 <option value="travel">Travel</option>
                 <option value="food">Food & Cooking</option>
@@ -212,15 +205,7 @@ export default function UploadPage() {
                 <option value="personal-development">Personal Development</option>
                 <option value="finance">Finance & Investing</option>
                 <option value="business">Business & Entrepreneurship</option>
-                <option value="marketing">Marketing</option>
-                <option value="design">Design</option>
-                <option value="photography">Photography</option>
-                <option value="gaming">Gaming</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="education">Education</option>
-                <option value="science">Science</option>
-                <option value="politics">Politics</option>
-                <option value="sports">Sports</option>
+                <option value="marketing">Marketing</option>     
                 <option value="other">Other</option>
               </select>
             </div>
