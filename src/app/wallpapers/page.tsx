@@ -85,7 +85,7 @@ export default function ExplorePage() {
 
     setLoading(true)
     try {
-      const res = await fetch(`/api/search?query=${encodeURIComponent(searchQuery)}&type=wallpaper`)
+      const res = await fetch(`/api/searchy?query=${encodeURIComponent(searchQuery)}&type=wallpaper`)
       const data = await res.json()
 
       if (data.success) {
